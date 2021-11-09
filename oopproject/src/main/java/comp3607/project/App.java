@@ -10,6 +10,9 @@ public final class App {
     private App() {
     }
 
+    //https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
+    // credit to the above link for the code
+    
     public static void  listFilesForFolder(final File folder) {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
