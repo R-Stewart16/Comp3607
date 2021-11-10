@@ -30,6 +30,7 @@ public final class App {
         final File folder = new File("FilesToRename");
 
         listFilesOfFolder(folder);
+
         // ========================[ STEP 5]=============================
         File nestedFolder = new File(folder + "/RenamedFiles");
         if (folder.exists()) {
@@ -38,6 +39,7 @@ public final class App {
             System.out.println("File created");
         }
         // ===============================================================
+
     }
 
 }
