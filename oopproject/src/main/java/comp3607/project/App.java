@@ -1,21 +1,15 @@
 package comp3607.project;
 
 import java.util.*;
-
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 /**
  * Hello world!
  */
 // Steps from
 public final class App {
+
     private App() {
     }
 
@@ -40,25 +34,19 @@ public final class App {
         return files;
     } // To put the files in an array, might use this to renamed files
 
-    public static void copyfiles(String originalFile, String destFile) {
-        File rootFile = new File(originalFile);
-        ArrayList<File> files = new ArrayList<>();
-        for (final File fileEntry : rootFile.listFiles()) {
-            files.add(fileEntry);
-
+    public static void renameFiles(File nestedFolder, File folder) {// this user made function is used to rename all the files in the filestorenamefolder //Working
+        double randomNum = Math.random();
+        File namingConvention2 = new File(nestedFolder + "/" + randomNum + ".docx");
+        for (File file : folder.listFiles()) {
+            if (file.isFile() && (folder.listFiles() != null)) {
+                file.renameTo(namingConvention2);
+                System.out.println(file + " is renamed");
+                renameFiles(nestedFolder, folder);
+            } else
+                System.out.println(file + " this is not a file");
         }
-        System.out.println(files);
 
     }
-
-    public static void copyfiles(File from, File to) throws IOException {
-        FileUtils.copyFile(from, to);
-    }
-    // public static void copyile(String from, String to) throws IOException {
-    // Path src = Paths.get(from);
-    // Path dest = Paths.get(to);
-    // Files.copy(src.toFile(), dest.toFile());
-    // }
 
     public static void main(String[] args) throws IOException {
         System.out.println("Hello World!");
@@ -66,7 +54,7 @@ public final class App {
         final File folder = new File("FilesToRename");
 
         // listFilesOfFolder(folder);
-        // ========================[ STEP 5]=============================
+        // ========================[ STEP 5] create folder=============================
         File nestedFolder = new File(folder + "/renamedFiles");
         if (folder.exists()) {
             // nestedFolder.createNewFile();//needed to create a file
@@ -74,17 +62,9 @@ public final class App {
             System.out.println("Folder created");
         }
         // ===============================================================
-        for (File files : arraylist(folder)) {
-            // if (folder.exists()) {
-            // files.getAbsolutePath();
-            // // copy file in filestorename
-            // if (nestedFolder.exists()) {
-            // copyfiles(files, nestedFolder);
-
-            // }
-            // }
-
-        }
+        // ArrayList<File> files = new ArrayList<>();
+        // ========================[ STEP 6] rename files in filestoRename=============================
+        renameFiles(nestedFolder, folder);
 
     }
 
