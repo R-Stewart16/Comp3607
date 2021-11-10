@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 /**
- * Hello world
+ * Hello world!
  */
 // Steps from
 public final class App {
@@ -40,19 +40,21 @@ public final class App {
         return files;
     } // To put the files in an array, might use this to renamed files
 
-//     public static void copyfiles(String originalFile, String destFile) {
-//         File rootFile = new File(originalFile);
-//         ArrayList<File> files = new ArrayList<>();
-//         for (final File fileEntry : rootFile.listFiles()) {
-//             files.add(fileEntry);
-//         }
-//         System.out.println(files);
-//     } my own code attempting to copy and paste the two files here but pieces missing 
+    public static void copyfiles(String originalFile, String destFile) {
+        File rootFile = new File(originalFile);
+        ArrayList<File> files = new ArrayList<>();
+        for (final File fileEntry : rootFile.listFiles()) {
+            files.add(fileEntry);
+
+        }
+        System.out.println(files);
+
+    }
 
     public static void copyfiles(File from, File to) throws IOException {
         FileUtils.copyFile(from, to);
     }
-    // public static void copyFile(String from, String to) throws IOException {// this function suppose the same thing as the above function
+    // public static void copyile(String from, String to) throws IOException {
     // Path src = Paths.get(from);
     // Path dest = Paths.get(to);
     // Files.copy(src.toFile(), dest.toFile());
