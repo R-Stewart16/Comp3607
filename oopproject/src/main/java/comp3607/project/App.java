@@ -49,12 +49,14 @@ public final class App {
     }
 
     public static void main(String[] args) throws IOException {
+        
         System.out.println("Hello World!");
 
-        final File folder = new File("FilesToRename");
+        final File folder = new File("oopproject/FilesToRename");
 
         listFilesForFolder(folder);
         // ========================[ STEP 5] create folder=============================
+
         File nestedFolder = new File(folder + "/renamedFiles");
         if (folder.exists()) {
             // nestedFolder.createNewFile();//needed to create a file
