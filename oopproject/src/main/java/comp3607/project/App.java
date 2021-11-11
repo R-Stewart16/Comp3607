@@ -16,10 +16,10 @@ public final class App {
     // https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
     // credit to the above link for the code
 
-    public static void listFilesOfFolder(final File folder) {
+    public static void listFilesForFolder(final File folder) {
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-                listFilesOfFolder(fileEntry);
+                listFilesForFolder(fileEntry);
             } else {
                 System.out.println(fileEntry.getName());
             }
@@ -53,7 +53,7 @@ public final class App {
 
         final File folder = new File("FilesToRename");
 
-        // listFilesOfFolder(folder);
+        listFilesForFolder(folder);
         // ========================[ STEP 5] create folder=============================
         File nestedFolder = new File(folder + "/renamedFiles");
         if (folder.exists()) {
@@ -64,7 +64,7 @@ public final class App {
         // ===============================================================
         // ArrayList<File> files = new ArrayList<>();
         // ========================[ STEP 6] rename files in filestoRename=============================
-        renameFiles(nestedFolder, folder);
+        //renameFiles(nestedFolder, folder);
 
     }
 
