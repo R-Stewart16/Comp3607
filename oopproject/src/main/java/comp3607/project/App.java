@@ -66,7 +66,7 @@ public final class App {
         // ===============================================================
         // ArrayList<File> files = new ArrayList<>();
         // ========================[ STEP 6] rename files in filestoRename=============================
-        //renameFiles(nestedFolder, folder);
+        renameFiles(nestedFolder, folder);
 
     }
 
