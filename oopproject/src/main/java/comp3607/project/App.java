@@ -36,7 +36,7 @@ public final class App {
 
     public static void renameFiles(File nestedFolder, File folder) {// this user made function is used to rename all the files in the filestorenamefolder //Working
         double randomNum = Math.random();
-        File namingConvention2 = new File(nestedFolder + "/" + randomNum + ".docx");
+        File namingConvention2 = new File(nestedFolder + "/" + randomNum + ".pdf");
         for (File file : folder.listFiles()) {
             if (file.isFile() && (folder.listFiles() != null)) {
                 file.renameTo(namingConvention2);
@@ -52,7 +52,7 @@ public final class App {
         
         System.out.println("Hello World!");
 
-        final File folder = new File("oopproject/FilesToRename");
+        final File folder = new File("FilesToRename");
 
         listFilesForFolder(folder);
         // ========================[ STEP 5] create folder=============================
