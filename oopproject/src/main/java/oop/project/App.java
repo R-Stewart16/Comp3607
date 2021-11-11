@@ -3,18 +3,10 @@ import java.util.*;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Hello world!
- */
 public final class App {
     private App() {
     }
 
-    /**
-     * Says hello to the world.
-     * @param args The arguments of the program.
-     */
-    
     // https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
     // credit to the above link for the code
 
@@ -29,12 +21,14 @@ public final class App {
     }// read names of assignment files [STEP 2]
 
     public static void main(String[] args) {
+        
         System.out.println("Hello World!");
         
         final File folder = new File("FilesToRename");
 
         listFilesOfFolder(folder);
-        // ========================[ STEP 5] create folder=============================
+
+        // ======================[ STEP 5] create folder===================
         File nestedFolder = new File(folder + "/renamedFiles");
         if (folder.exists()) {
             // nestedFolder.createNewFile();//needed to create a file
