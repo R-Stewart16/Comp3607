@@ -6,7 +6,7 @@ public class Student {
     
     private ArrayList<String> name;
     private String participantID;
-    private String strudentID;
+    private String studentID;
     private ArrayList<String> assignments;
 
     public Student(String id){
@@ -17,7 +17,9 @@ public class Student {
         this.name.add(name);
     }
 
-    
+    public void addStudentID(String id){
+        
+    }
 
 
 }
