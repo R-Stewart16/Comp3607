@@ -17,74 +17,110 @@ public final class App {
 
     }
 
-    public static void readCSVFile(){ // locates the CSV file in folder and reads the contents of the CSV
-        try{
-            File currDirectory = new File("oopproject/Sample files and CSVs-20211111/sample1/sample1"); // filepath to folder with all files
+    public static String findCSVFilePath(){
+        File currentDir = new File("oopproject/FilesToRename");
 
-        /*  for (File file: currDirectory.listFiles()){
-                System.out.println(file.getName());
-            } */
-            for (File file: currDirectory.listFiles()){ //
-                String filename = file.getName();
-    
-                if(filename.endsWith(".csv")){
-                    File studentData = new File ("oopproject/Sample files and CSVs-20211111/sample1/sample1" + "/" + filename);
-                    Scanner scan = new Scanner(studentData);
-                    scan.nextLine(); //skips header
-
-                    List<Student> students = new ArrayList<Student>();
-                    String line;
-                    String[] temp = new String[12];
-
-                    while (scan.hasNextLine()){
-                        line = scan.nextLine();
-
-                        temp = line.split(",");
-                        for (int i=0; i<temp.length; i++){
-                            System.out.print(temp[i]);
-                            System.out.print("apples");
-                        }
-                        System.out.println("\n");
-                        System.out.println(temp.length);
-
-                        /* String pID = temp[0].replace("Participant", "");
-                        String name = temp[1];
-                        String sID = temp[2];
-                        String email = temp[3];
-                        String status = temp[4];
-                        String grade = temp[5];
-                        String maxGrade = temp[6];
-                        String changeGrade = temp[7];
-
-                        String dayModified;
-                        String dateModified;
-                        String timeModified;
-                        int count;
-
-                        if (temp[8] == "-"){
-                            dayModified = " ";
-                            dateModified = " ";
-                            timeModified = " ";
-                            count = 9;
-                        }
-                        else{
-                            dayModified = temp[8];
-                            dateModified = temp[9];
-                            timeModified = temp[10];
-                            count = 11;
-                        }
-                        String feedback = temp[count];
-
-                        Student s = new Student(pID, name, sID, email, status, grade, maxGrade, changeGrade, dayModified, dateModified, timeModified, feedback);
-                        students.add(s);
-                        System.out.println("apples");
-                        System.out.println(s.toString()); */
-                    } //Hello
-                    
-                    scan.close();
-                    break;
-                }
+        for(File file: currentDir.listFiles()){
+            if(file.getName().endsWith(".csv")){
+                return file.getPath();
             }
+        }
+        System.out.println("File not found");
+        return "File not found";
+    }
+
+    public static void readCSVFile(){ // locates the CSV file in folder and reads the contents of the CSV
+
+        try{
+                
+            File studentData = new File (findCSVFilePath());
+            Scanner scan = new Scanner(studentData);
+            scan.nextLine(); //skips header
+
+            ArrayList<Student> students = new ArrayList<Student>();
+            String line;
+            String[] temp = new String[12];
+            String[] tempSubStrings = new String[4];
+            String[] names = new String[4];
+
+            while (scan.hasNextLine()){
+                line = scan.nextLine();
+
+                temp = line.split(",");
+
+                tempSubStrings = temp[0].split("\\s");
+
+                // System.out.println(temp.length);
+                // System.out.println(tempSubStrings.length);
+
+                Student student = new Student(tempSubStrings[1]);
+
+                System.out.println(student.getParticipantID());
+
+                temp[1] = temp[1].trim();
+                names = temp[1].split(" ");
+                //System.out.println(temp[1]);
+
+                for(int i=0; i<names.length; i++){
+                    System.out.println(names[i]);
+                    student.addName(names[i]);
+                }
+
+                System.out.println(student.getNames());
+                System.out.println(" ");
+                
+
+                /*
+                for (String name: names){
+                    student.addName(name);
+                }
+
+                System.out.println(student.getNames());
+
+                
+                for (int i=0; i<temp.length; i++){
+                    System.out.print(temp[i]);
+                    System.out.print("apples");
+                }
+                System.out.println("\n");
+                System.out.println(temp.length);
+                
+                String pID = temp[0].replace("Participant", "");
+                String name = temp[1];
+                String sID = temp[2];
+                String email = temp[3];
+                String status = temp[4];
+                String grade = temp[5];
+                String maxGrade = temp[6];
+                String changeGrade = temp[7];
+
+                String dayModified;
+                String dateModified;
+                String timeModified;
+                int count;
+
+                if (temp[8] == "-"){
+                    dayModified = " ";
+                    dateModified = " ";
+                    timeModified = " ";
+                    count = 9;
+                }
+                else{
+                    dayModified = temp[8];
+                    dateModified = temp[9];
+                    timeModified = temp[10];
+                    count = 11;
+                }
+                String feedback = temp[count];
+
+                Student s = new Student(pID, name, sID, email, status, grade, maxGrade, changeGrade, dayModified, dateModified, timeModified, feedback);
+                students.add(s);
+                System.out.println("apples");
+                System.out.println(s.toString()); */
+            }
+            
+            scan.close();
+                
         }
         catch(Exception e){
             System.out.println(e.toString());
