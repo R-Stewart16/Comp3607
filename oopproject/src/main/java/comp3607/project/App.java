@@ -67,14 +67,14 @@ public final class App {
             System.out.println("Folder created");
         }
 
-        /*
+        
         System.out.println("");
         System.out.println("Printing CSV");
 
         while(csv.hasNext()){
             System.out.println(csv.nextLine());
         }
-        */
+        
 
         // ===============================================================
         // ArrayList<File> files = new ArrayList<>();
