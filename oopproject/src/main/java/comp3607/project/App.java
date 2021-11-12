@@ -89,6 +89,7 @@ public final class App {
                 System.out.println(student.getEmailAddress());
                 System.out.println(" ");
 
+                students.add(student);
                 /*
                 for (String name: names){
                     student.addName(name);
@@ -137,7 +138,7 @@ public final class App {
                 System.out.println("apples");
                 System.out.println(s.toString()); */
             }
-            
+            //System.out.println(students);
             scan.close();
                 
         }
