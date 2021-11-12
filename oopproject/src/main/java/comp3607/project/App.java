@@ -44,10 +44,15 @@ public final class App {
             String[] names = new String[4];
 
             while (scan.hasNextLine()){
+                
                 line = scan.nextLine();
-
                 temp = line.split(",");
 
+                // Error checking
+                if (temp[0] == "\\s")
+                    continue;
+
+                //Seperating the word participants from the digits then useing those digits to start a student object
                 tempSubStrings = temp[0].split("\\s");
 
                 // System.out.println(temp.length);
@@ -57,6 +62,8 @@ public final class App {
 
                 System.out.println(student.getParticipantID());
 
+
+                //Creating an Array of all names a student might have and adding that to the Names Arraylist in Students
                 temp[1] = temp[1].trim();
                 names = temp[1].split(" ");
                 //System.out.println(temp[1]);
@@ -67,8 +74,20 @@ public final class App {
                 }
 
                 System.out.println(student.getNames());
-                System.out.println(" ");
+
+                //Adding the student ID
+                temp[2] = temp [2].trim();
+                student.addStudentID(temp[2]);
+
+                System.out.println(student.getStudentID());
                 
+
+                //Adding email address
+                temp[3] = temp[3].trim();
+                student.addEmailAddress(temp[3]);
+
+                System.out.println(student.getEmailAddress());
+                System.out.println(" ");
 
                 /*
                 for (String name: names){
