@@ -18,7 +18,7 @@ public final class App {
     }
 
     public static String findCSVFilePath(){
-        File currentDir = new File("oopproject/FilesToRename");
+        File currentDir = new File("FilesToRename");
 
         for(File file: currentDir.listFiles()){
             if(file.getName().endsWith(".csv")){
@@ -69,7 +69,7 @@ public final class App {
                 //System.out.println(temp[1]);
 
                 for(int i=0; i<names.length; i++){
-                    System.out.println(names[i]);
+                    //System.out.println(names[i]);
                     student.addName(names[i]);
                 }
 
@@ -207,6 +207,5 @@ public final class App {
         renameFiles(nestedFolder, folder);
         */
     }
-    // Hewllo
     
 }
