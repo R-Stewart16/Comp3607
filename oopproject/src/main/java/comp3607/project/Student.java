@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Student{
 
-    
     private ArrayList<String> names;
     private String participantID;
     private String studentID;

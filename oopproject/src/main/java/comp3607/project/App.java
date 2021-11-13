@@ -102,6 +102,64 @@ public final class App {
         return students;
     }
 
+    public static ArrayList<Student> traverseAssignments(ArrayList<Student> students){ //goes through the FilesToRename folder and assigns files to the respective student
+        File currentDir = new File ("oopproject/FilesToRename"); //filepath
+
+        for (File file: currentDir.listFiles()){                                                //goes through all files in folder
+            if((file.getName().endsWith(".pdf")) || (file.getName().endsWith(".docx"))){        //only looks at .pdf and .docx files
+                String line = file.getName();                                                   //gets the full filename
+
+                String[] temp;
+                String[] tempName = new String[4];
+                ArrayList<String> names = new ArrayList<String>();
+                String participantID;
+
+                //Separate the filename by _ and stores it in array
+                temp = line.split("_");
+                
+                /* for(String t: temp){
+                    System.out.print(t);
+                    System.out.print(" ");
+                }
+                System.out.println(" "); */
+
+                //Storing the names of the student for that filename
+                temp[0] = temp[0].trim();
+                tempName = temp[0].split(" ");
+                for(String name: tempName){
+                    names.add(name);
+                }
+
+                //System.out.println(names);
+                
+                //Getting participantID from that filename
+                temp[1] = temp[1].trim();
+                participantID = temp[1];
+
+
+                for(Student student: students){                             //Traversing the entire Students arraylist and getting their full name
+                    ArrayList<String> studentName = student.getNames();     //gets the full name of the student in Students list
+                    String pID = student.getParticipantID();                //gets the participantID of the student in Students list
+
+                    if ( (studentName.equals(names)) || (pID.equals(participantID))  ){     //compares the student name/ participantID in the assignment file with the Students list
+                        student.addAssignment(line);                                        // if it matches, the assignment filename is added to the assignments list of that student
+
+                        /*System.out.println(studentName);
+                        System.out.println(names);
+                        System.out.println("----------------------------"); */
+                    }
+                    
+                    else{
+                        continue;
+                    }
+                }
+
+            }
+
+        }
+        return students;
+    }
+
 
     // https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
     // credit to the above link for the code
@@ -141,18 +199,37 @@ public final class App {
     public static void main(String[] args) throws IOException {
         
         System.out.println("Hello World!");
+
         // ========================[STEP 1] read CSV file=========================================
+
         ArrayList<Student> students = new ArrayList<Student>();
         students = readCSVFile();
         System.out.println("=====================================================");
 
-        for(Student s: students){
+        /*for(Student s: students){
             System.out.println(s.getParticipantID());
             System.out.println(s.getNames());
             System.out.println(s.getStudentID());
             System.out.println(s.getEmailAddress());
             System.out.print("\n");
         }
+        */
+        //==========================================================================================
+
+
+        //==========================[STEP 1.5] assign student files to respective student==================
+
+        students = traverseAssignments(students);
+        for(Student s: students){
+            System.out.println(s.getParticipantID());
+            System.out.println(s.getNames());
+            System.out.println(s.getStudentID());
+            System.out.println(s.getEmailAddress());
+            System.out.println(s.getAssignments());
+            System.out.print("\n");
+        }
+        //===============================================================================================
+
 
         //========================================================================================
         final File folder = new File("FilesToRename");
