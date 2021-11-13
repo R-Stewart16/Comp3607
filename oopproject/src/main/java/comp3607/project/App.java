@@ -2,12 +2,10 @@ package comp3607.project;
 
 import java.util.*;
 import java.io.File;
+import java.util.Scanner;
 import java.io.IOException;
 
-/**
- * Hello world!
- */
-// Steps from
+// Steps from gather room 1
 public final class App {
 
     private App() {
@@ -37,6 +35,7 @@ public final class App {
     public static void renameFiles(File nestedFolder, File folder) {// user-defined function is used to rename files
         double randomNum = Math.random();
         File namingConvention2 = new File(nestedFolder + "/" + randomNum + ".pdf");
+        
         for (File file : folder.listFiles()) {
             if (file.getName().endsWith(".pdf")) {
                 System.out.println("file: " + folder.listFiles());
@@ -49,17 +48,31 @@ public final class App {
 
         System.out.println("Hello World!");
 
-        final File folder = new File("FilesToRename");
+        final File folder = new File("oopproject/FilesToRename");
 
         listFilesForFolder(folder);
+
         // ========================[ STEP 5] create folder=============================
 
         File nestedFolder = new File(folder + "/renamedFiles");
+
+        Scanner csv = new Scanner(new File("oopproject/FilesToRename/Sample 1 CSV.csv")); 
+
         if (folder.exists()) {
             // nestedFolder.createNewFile();//needed to create a file
             nestedFolder.mkdir();// to create a folder/directory
             System.out.println("Folder created");
         }
+
+        
+        System.out.println("");
+        System.out.println("Printing CSV");
+
+        while(csv.hasNext()){
+            System.out.println(csv.nextLine());
+        }
+        
+
         // ===============================================================
         // ========================[ STEP 6] rename files in filestoRename============
         renameFiles(nestedFolder, folder);
