@@ -18,7 +18,7 @@ public final class App {
     }
 
     public static String findCSVFilePath(){
-        File currentDir = new File("FilesToRename");
+        File currentDir = new File("oopproject/FilesToRename");
 
         for(File file: currentDir.listFiles()){
             if(file.getName().endsWith(".csv")){
@@ -90,53 +90,7 @@ public final class App {
                 System.out.println(" ");
 
                 students.add(student);
-                /*
-                for (String name: names){
-                    student.addName(name);
-                }
-
-                System.out.println(student.getNames());
-
                 
-                for (int i=0; i<temp.length; i++){
-                    System.out.print(temp[i]);
-                    System.out.print("apples");
-                }
-                System.out.println("\n");
-                System.out.println(temp.length);
-                
-                String pID = temp[0].replace("Participant", "");
-                String name = temp[1];
-                String sID = temp[2];
-                String email = temp[3];
-                String status = temp[4];
-                String grade = temp[5];
-                String maxGrade = temp[6];
-                String changeGrade = temp[7];
-
-                String dayModified;
-                String dateModified;
-                String timeModified;
-                int count;
-
-                if (temp[8] == "-"){
-                    dayModified = " ";
-                    dateModified = " ";
-                    timeModified = " ";
-                    count = 9;
-                }
-                else{
-                    dayModified = temp[8];
-                    dateModified = temp[9];
-                    timeModified = temp[10];
-                    count = 11;
-                }
-                String feedback = temp[count];
-
-                Student s = new Student(pID, name, sID, email, status, grade, maxGrade, changeGrade, dayModified, dateModified, timeModified, feedback);
-                students.add(s);
-                System.out.println("apples");
-                System.out.println(s.toString()); */
             }
             //System.out.println(students);
             scan.close();
