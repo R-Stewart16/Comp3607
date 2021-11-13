@@ -18,7 +18,7 @@ public final class App {
     }
 
     public static String findCSVFilePath(){
-        File currentDir = new File("oopproject/FilesToRename");
+        File currentDir = new File("FilesToRename");
 
         for(File file: currentDir.listFiles()){
             if(file.getName().endsWith(".csv")){
@@ -48,12 +48,21 @@ public final class App {
                 line = scan.nextLine();
                 temp = line.split(",");
 
+                //Iterate through the array of strings and trims all whitespaces.
+                for(int i = 0; i<temp.length;i++){
+                    temp[i] = temp[i].trim();
+                }
+
                 // Error checking
                 if (temp[0] == "\\s")
                     continue;
 
                 //Seperating the word participants from the digits then useing those digits to start a student object
                 tempSubStrings = temp[0].split("\\s");
+
+                for(int i = 0; i< tempSubStrings.length ;i++){
+                    tempSubStrings[i] = tempSubStrings[i].trim();
+                }
 
                 // System.out.println(temp.length);
                 // System.out.println(tempSubStrings.length);
@@ -65,12 +74,12 @@ public final class App {
 
                 //Creating an Array of all names a student might have and adding that to the Names Arraylist in Students
                 temp[1] = temp[1].trim();
-                names = temp[1].split(" ");
-                //System.out.println(temp[1]);
+                names = temp[1].split("\\s");
+                
 
                 for(int i=0; i<names.length; i++){
-                    //System.out.println(names[i]);
-                    student.addName(names[i]);
+                    names[i] = names[i].trim();
+                    student.addName(names[i].trim());
                 }
 
                 //System.out.println(student.getNames());
@@ -103,7 +112,7 @@ public final class App {
     }
 
     public static ArrayList<Student> traverseAssignments(ArrayList<Student> students){ //goes through the FilesToRename folder and assigns files to the respective student
-        File currentDir = new File ("oopproject/FilesToRename"); //filepath
+        File currentDir = new File ("FilesToRename"); //filepath
 
         for (File file: currentDir.listFiles()){                                                //goes through all files in folder
             if((file.getName().endsWith(".pdf")) || (file.getName().endsWith(".docx"))){        //only looks at .pdf and .docx files
