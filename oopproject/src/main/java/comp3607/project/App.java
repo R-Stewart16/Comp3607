@@ -29,15 +29,15 @@ public final class App {
         return "File not found";
     }
 
-    public static void readCSVFile(){ // locates the CSV file in folder and reads the contents of the CSV
-
+    public static ArrayList<Student> readCSVFile(){ // locates the CSV file in folder and reads the contents of the CSV
+        ArrayList<Student> students = new ArrayList<Student>();
         try{
                 
             File studentData = new File (findCSVFilePath());
             Scanner scan = new Scanner(studentData);
             scan.nextLine(); //skips header
 
-            ArrayList<Student> students = new ArrayList<Student>();
+            //ArrayList<Student> students = new ArrayList<Student>();
             String line;
             String[] temp = new String[12];
             String[] tempSubStrings = new String[4];
@@ -60,7 +60,7 @@ public final class App {
 
                 Student student = new Student(tempSubStrings[1]);
 
-                System.out.println(student.getParticipantID());
+                //System.out.println(student.getParticipantID());
 
 
                 //Creating an Array of all names a student might have and adding that to the Names Arraylist in Students
@@ -73,21 +73,21 @@ public final class App {
                     student.addName(names[i]);
                 }
 
-                System.out.println(student.getNames());
+                //System.out.println(student.getNames());
 
                 //Adding the student ID
                 temp[2] = temp [2].trim();
                 student.addStudentID(temp[2]);
 
-                System.out.println(student.getStudentID());
+                //System.out.println(student.getStudentID());
                 
 
                 //Adding email address
                 temp[3] = temp[3].trim();
                 student.addEmailAddress(temp[3]);
 
-                System.out.println(student.getEmailAddress());
-                System.out.println(" ");
+                //System.out.println(student.getEmailAddress());
+                //System.out.println(" ");
 
                 students.add(student);
                 
@@ -99,6 +99,7 @@ public final class App {
         catch(Exception e){
             System.out.println(e.toString());
         }
+        return students;
     }
 
 
@@ -141,7 +142,17 @@ public final class App {
         
         System.out.println("Hello World!");
         // ========================[STEP 1] read CSV file=========================================
-        readCSVFile();
+        ArrayList<Student> students = new ArrayList<Student>();
+        students = readCSVFile();
+        System.out.println("=====================================================");
+
+        for(Student s: students){
+            System.out.println(s.getParticipantID());
+            System.out.println(s.getNames());
+            System.out.println(s.getStudentID());
+            System.out.println(s.getEmailAddress());
+            System.out.print("\n");
+        }
 
         //========================================================================================
         final File folder = new File("FilesToRename");
