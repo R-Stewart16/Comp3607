@@ -34,17 +34,14 @@ public final class App {
         return files;
     } // To put the files in an array, might use this to renamed files
 
-    public static void renameFiles(File nestedFolder, File folder) {// this user made function is used to rename all the
-                                                                    // files in the filestorenamefolder //Working
+    public static void renameFiles(File nestedFolder, File folder) {// user-defined function is used to rename files
         double randomNum = Math.random();
         File namingConvention2 = new File(nestedFolder + "/" + randomNum + ".pdf");
         for (File file : folder.listFiles()) {
-            if (file.isFile() && (folder.listFiles() != null)) {
+            if (file.getName().endsWith(".pdf")) {
+                System.out.println("file: " + folder.listFiles());
                 file.renameTo(namingConvention2);
-                System.out.println(file + " is renamed");
-                renameFiles(nestedFolder, folder);
-            } else
-                System.out.println(file + " this is not a file");
+            }
         }
     }
 
@@ -52,7 +49,7 @@ public final class App {
 
         System.out.println("Hello World!");
 
-        final File folder = new File("oopproject/FilesToRename");
+        final File folder = new File("FilesToRename");
 
         listFilesForFolder(folder);
         // ========================[ STEP 5] create folder=============================
@@ -66,7 +63,6 @@ public final class App {
         // ===============================================================
         // ========================[ STEP 6] rename files in filestoRename============
         renameFiles(nestedFolder, folder);
-
     }
 
 }
