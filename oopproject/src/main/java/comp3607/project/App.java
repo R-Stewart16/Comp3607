@@ -204,26 +204,16 @@ public final class App {
         }
     }
 
-    // public static void renameFiles(File nestedFolder, File folder) {//
-    // user-defined function is used to rename files
-    // double randomNum = Math.random();
-    // File namingConvention2 = new File(nestedFolder + "/renamedFile" + randomNum +
-    // ".pdf");
-    // // File[] files = folder.listFiles();
-    // // int length = files.length;
-    // // for (int i = 0; i < length; i = i + 1) {
-    // // if (files[i].getName().endsWith(".pdf")) {
-    // // System.out.println("file: " + files[i].getName());
-    // // files[i].renameTo(namingConvention2);
-    // // }
-    // // }
-    // for (File file : folder.listFiles()) {
-    // if (file.getName().endsWith(".pdf")) {
-    // System.out.println("file: " + file.getName());
-    // file.renameTo(namingConvention2);
-    // }
-    // }
-    // }
+    public static void renameFiles(File nestedFolder) {// user-defined function is used to rename files
+        for (File file : nestedFolder.listFiles()) {
+            double randomNum = Math.random();
+            File namingConvention2 = new File(nestedFolder + "/" + randomNum + ".pdf");
+            if (file.getName().endsWith(".pdf")) {
+                System.out.println("file: " + file.getName());
+                file.renameTo(namingConvention2);
+            }
+        }
+    }
 
     public static void main(String[] args) throws IOException {
 
@@ -267,6 +257,7 @@ public final class App {
         }
 
         copyFile(nestedFolder, folder);
+        renameFiles(nestedFolder);
 
         /*
          * listFilesForFolder(folder); // ========================[ STEP 5] create
@@ -290,7 +281,6 @@ public final class App {
          * // =============================================================== //
          * ========================[ STEP 6] rename files in filestoRename============
          */
-        // renameFiles(nestedFolder, folder);
 
     }
 
