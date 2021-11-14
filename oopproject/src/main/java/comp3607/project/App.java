@@ -208,9 +208,14 @@ public final class App {
         for (File file : nestedFolder.listFiles()) {
             double randomNum = Math.random();
             File namingConvention2 = new File(nestedFolder + "/" + randomNum + ".pdf");
+            File namingConvention3 = new File(nestedFolder + "/" + randomNum + ".docx");
+
             if (file.getName().endsWith(".pdf")) {
                 System.out.println("file: " + file.getName());
                 file.renameTo(namingConvention2);
+            } else if (file.getName().endsWith(".docx")) {
+                System.out.println("file: " + file.getName());
+                file.renameTo(namingConvention3);
             }
         }
     }
