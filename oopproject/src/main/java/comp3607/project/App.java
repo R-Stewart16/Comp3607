@@ -4,6 +4,8 @@ import java.util.*;
 import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,25 +193,37 @@ public final class App {
      * files.add(fileEntry); } return files; } // To put the files in an array,
      * might use this to renamed files
      */
-
-    public static void renameFiles(File nestedFolder, File folder) {// user-defined function is used to rename files
-        double randomNum = Math.random();
-        File namingConvention2 = new File(nestedFolder + "/renamedFile" + randomNum + ".pdf");
-        // File[] files = folder.listFiles();
-        // int length = files.length;
-        // for (int i = 0; i < length; i = i + 1) {
-        // if (files[i].getName().endsWith(".pdf")) {
-        // System.out.println("file: " + files[i].getName());
-        // files[i].renameTo(namingConvention2);
-        // }
-        // }
+    public static void copyFile(File nestedFolder, File folder) throws IOException {
+        String path = "oopproject/FilesToRename/renamedFiles/";
         for (File file : folder.listFiles()) {
             if (file.getName().endsWith(".pdf")) {
-                System.out.println("file: " + file.getName());
-                file.renameTo(namingConvention2);
+                // copy files from folder to nestedFolder
+                Files.copy(file.toPath(), (new File(path + file.getName())).toPath(),
+                        StandardCopyOption.REPLACE_EXISTING);
             }
         }
     }
+
+    // public static void renameFiles(File nestedFolder, File folder) {//
+    // user-defined function is used to rename files
+    // double randomNum = Math.random();
+    // File namingConvention2 = new File(nestedFolder + "/renamedFile" + randomNum +
+    // ".pdf");
+    // // File[] files = folder.listFiles();
+    // // int length = files.length;
+    // // for (int i = 0; i < length; i = i + 1) {
+    // // if (files[i].getName().endsWith(".pdf")) {
+    // // System.out.println("file: " + files[i].getName());
+    // // files[i].renameTo(namingConvention2);
+    // // }
+    // // }
+    // for (File file : folder.listFiles()) {
+    // if (file.getName().endsWith(".pdf")) {
+    // System.out.println("file: " + file.getName());
+    // file.renameTo(namingConvention2);
+    // }
+    // }
+    // }
 
     public static void main(String[] args) throws IOException {
 
@@ -244,7 +258,15 @@ public final class App {
         // ===============================================================================================
 
         // ========================================================================================
-        // final File folder = new File("oopproject/FilesToRename");
+        final File folder = new File("oopproject/FilesToRename");
+        File nestedFolder = new File(folder + "/renamedFiles");
+
+        if (folder.exists()) {
+            nestedFolder.mkdir();// to create a folder/directory
+            System.out.println("Folder created");
+        }
+
+        copyFile(nestedFolder, folder);
 
         /*
          * listFilesForFolder(folder); // ========================[ STEP 5] create
