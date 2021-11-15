@@ -12,10 +12,19 @@ import java.util.List;
 
 // Steps from gather room 1
 public final class App {
+    private ArrayList <AssignmentFiles> files = new ArrayList<>();
+    static ArrayList<Student> students = new ArrayList<Student>();
 
+
+    public App(){
+
+    }
+
+/*
     private App() {
 
     }
+    */
 
     public static String findCSVFilePath() {
         File currentDir = new File("oopproject/FilesToRename");
@@ -30,7 +39,7 @@ public final class App {
     }
 
     public static ArrayList<Student> readCSVFile() { // locates the CSV file in folder and reads the contents of the CSV
-        ArrayList<Student> students = new ArrayList<Student>();
+        //ArrayList<Student> students = new ArrayList<Student>();
         try {
 
             File studentData = new File(findCSVFilePath());
@@ -109,10 +118,14 @@ public final class App {
         return students;
     }
 
+    public ArrayList<Student> getStudents(){
+        return this.students;
+    }
+
     public static ArrayList<Student> traverseAssignments(ArrayList<Student> students) { // goes through the
-                                                                                        // FilesToRename folder and
-                                                                                        // assigns files to the
-                                                                                        // respective student
+        // FilesToRename folder and
+        // assigns files to the
+        // respective student
         File currentDir = new File("oopproject/FilesToRename"); // filepath
         // for (File f : currentDir.listFiles()) {
         // System.out.println(f.getName());
@@ -120,7 +133,7 @@ public final class App {
 
         for (File file : currentDir.listFiles()) { // goes through all files in folder
             if ((file.getName().endsWith(".pdf")) || (file.getName().endsWith(".docx"))) { // only looks at .pdf and
-                                                                                           // .docx files
+                // .docx files
                 String line = file.getName(); // gets the full filename
 
                 String[] temp;
@@ -150,16 +163,16 @@ public final class App {
                 participantID = temp[1];
 
                 for (Student student : students) { // Traversing the entire Students arraylist and getting their full
-                                                   // name
+                    // name
                     ArrayList<String> studentName = student.getNames(); // gets the full name of the student in Students
-                                                                        // list
+                    // list
                     String pID = student.getParticipantID(); // gets the participantID of the student in Students list
 
                     if ((studentName.equals(names)) || (pID.equals(participantID))) { // compares the student name/
-                                                                                      // participantID in the assignment
-                                                                                      // file with the Students list
+                        // participantID in the assignment
+                        // file with the Students list
                         student.addAssignment(line); // if it matches, the assignment filename is added to the
-                                                     // assignments list of that student
+                        // assignments list of that student
 
                         /*
                          * System.out.println(studentName); System.out.println(names);
@@ -178,6 +191,20 @@ public final class App {
         return students;
     }
 
+    public void addAssignments(){
+        File currentDir = new File("oopproject/FilesToRename"); // filepath
+
+        for(File file:currentDir.listFiles()){
+            String fileName = file.getName();
+            files.add(new AssignmentFiles(fileName));
+        }
+
+    }
+
+    public void displayAssignmentName(int index){
+        System.out.println(files.get(index).toString());
+    }
+
     // https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
     // credit to the above link for the code
 
@@ -187,7 +214,7 @@ public final class App {
      * listFilesForFolder(fileEntry); } else {
      * System.out.println(fileEntry.getName()); } } }// read names of assignment
      * files [STEP 2]
-     * 
+     *
      * public static ArrayList<File> arraylist(final File folder) { ArrayList<File>
      * files = new ArrayList<>(); for (final File fileEntry : folder.listFiles()) {
      * files.add(fileEntry); } return files; } // To put the files in an array,
@@ -220,6 +247,14 @@ public final class App {
         }
     }
 
+
+
+
+
+
+
+
+
     public static void main(String[] args) throws IOException {
 
         System.out.println("Hello World!");
@@ -241,6 +276,7 @@ public final class App {
         // ==========================[STEP 1.5] assign student files to respective
         // student==================
 
+        /*
         students = traverseAssignments(students);
         for (Student s : students) {
             System.out.println(s.getParticipantID());
@@ -250,6 +286,7 @@ public final class App {
             System.out.println(s.getAssignments());
             System.out.print("\n");
         }
+        */
         // ===============================================================================================
 
         // ========================================================================================
@@ -261,28 +298,44 @@ public final class App {
             System.out.println("Folder created");
         }
 
+
+        System.out.println("\n\n\n\n");
+        App g = new App();
+        g.addAssignments();
+        g.displayAssignmentName(1);
+
+        g.displayAssignmentName(2);
+
+        g.displayAssignmentName(25);
+
         copyFile(nestedFolder, folder);
         renameFiles(nestedFolder);
+
+        /*TESTING*/
+
+        System.out.println("\n\n\n\n\nTesting Student arraylist...\n");
+        System.out.println(g.getStudents().get(15).getEmailAddress());
+
 
         /*
          * listFilesForFolder(folder); // ========================[ STEP 5] create
          * folder=============================
-         * 
+         *
          * File nestedFolder = new File(folder + "/renamedFiles");
-         * 
+         *
          * Scanner csv = new Scanner(new
          * File("oopproject/FilesToRename/Sample 1 CSV.csv"));
-         * 
+         *
          * if (folder.exists()) { // nestedFolder.createNewFile();//needed to create a
          * file nestedFolder.mkdir();// to create a folder/directory
          * System.out.println("Folder created"); }
-         * 
-         * 
+         *
+         *
          * System.out.println(""); System.out.println("Printing CSV");
-         * 
+         *
          * while(csv.hasNext()){ System.out.println(csv.nextLine()); }
-         * 
-         * 
+         *
+         *
          * // =============================================================== //
          * ========================[ STEP 6] rename files in filestoRename============
          */
