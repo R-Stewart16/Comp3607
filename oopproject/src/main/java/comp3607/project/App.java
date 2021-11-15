@@ -202,7 +202,11 @@ public final class App {
     }
 
     public void displayAssignmentName(int index){
-        System.out.println(files.get(index).toString());
+        for(int i=0; i<25; i++){
+            index = i;
+            System.out.println(files.get(index).toString());
+        }
+        
     }
 
     // https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
@@ -304,17 +308,25 @@ public final class App {
         g.addAssignments();
         g.displayAssignmentName(1);
 
-        g.displayAssignmentName(2);
+        //g.displayAssignmentName(2);
 
-        g.displayAssignmentName(25);
-
+        //g.displayAssignmentName(25);
+        System.out.println("=======================================");
         copyFile(nestedFolder, folder);
         renameFiles(nestedFolder);
+        System.out.println("=======================================");
+        System.out.println("\n\t\t\t Test file names extraction...");
+        System.out.println("=======================================");
+        
+        g.displayAssignmentName(1);
+
+        System.out.println("=======================================");
 
         /*TESTING*/
 
-        System.out.println("\n\n\n\n\nTesting Student arraylist...\n");
+        System.out.println("\nTesting Student arraylist...\n");
         System.out.println(g.getStudents().get(15).getEmailAddress());
+        System.out.println("\n=======================================");
 
 
         /*

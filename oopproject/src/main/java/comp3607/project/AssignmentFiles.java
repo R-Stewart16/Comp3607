@@ -34,20 +34,20 @@ public class AssignmentFiles {
             for(int i=0; i<fNameDelimited.length; i++){
                 //do something 
                 if(fNameDelimited[i].equals(temp.getParticipantID()) || fNameDelimited[i].equals(temp.getEmailAddress()) ||
-                    fNameDelimited[i].equals(temp.getStudentID()) /*|| fNameDelimited[i].equals(temp.getNames())*/  ) {
+                    fNameDelimited[i].equals(temp.getStudentID())    /*|| fNameDelimited[i].equals(temp.getNames()) */ ) {
                     
                         this.studentIdentifier = temp.getParticipantID();
                         this.studentID = temp.getStudentID();
                         this.studentEmail = temp.getEmailAddress();
                         this.studentName = temp.getNames();
-                        
-                
                 }
+
             }
 
         }
     }
 
+    /*
     private String extractName(){
         if(!extractIdentifier().equals("")){    //if identifier found go directly to other stuff //else search 
             
@@ -114,16 +114,17 @@ public class AssignmentFiles {
         }
         return "";
     }
-
+*/
 
     public void setFileDetails(){
+        extract();
         //this.studentName = extractName();
         /*
         this.studentID = extractID();
         this.studentEmail = extractEmail();
         this.studentIdentifier = extractIdentifier();
         */
-        extract();
+        
     }
 
 
@@ -131,16 +132,18 @@ public class AssignmentFiles {
     public String toString(){
         String output = "FileName: "+fName+"\nDelimited:";
         output = output+ (Arrays.toString(fNameDelimited))+"\n\n";
-       /* 
-        output+="Identifier: "+extractIdentifier()+"\n";
-        output+="Email Address: "+extractEmail()+"\n";
-        output+="Student ID: "+extractID()+"\n\n\n\n";
-        */
+       
         output+="\tIdentifier: "+ studentIdentifier +"\n";
         output+="\tStudent Name: "+ (studentName.toString())  +"\n";
         output+="\tEmail Address: "+ studentEmail +"\n";
         output+="\tStudent ID: "+ studentID +"\n\n\n\n";
         
+        /* 
+        output+="Identifier: "+extractIdentifier()+"\n";
+        output+="Email Address: "+extractEmail()+"\n";
+        output+="Student ID: "+extractID()+"\n\n\n\n";
+        */
+
         return output;
     }
 
