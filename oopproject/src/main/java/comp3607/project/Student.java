@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Student{
 
     private ArrayList<String> names;
-    private String participantID;
+    
+    private String participantID;       //identifier
     private String studentID;
     private String emailAddress;
     private ArrayList<String> assignments;
@@ -57,18 +58,4 @@ public class Student{
 
 
 }
-    /*
-    public String toString() {
-        String details = "Participant ID: " + this.participantID;
-        details += " Name: "  + this.name;
-        details += " Student ID: " + this.studentID;
-        details += " Email: " + this.email;
-        details += " Status: " + this.status;
-        details += " Grade: " + this.grade;
-        details += " Maximum Grade: " + this.maxGrade;
-        details += " Grade can be changed: " + this.changeGrade;
-        details += " Last Modified: " + this.dayModified + " " + this.dateModified + " " + this.timeModified;
-        details += " Feedback comments: " + this.feedback;
-
-        return details;
-        */
+    
