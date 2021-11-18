@@ -10,9 +10,11 @@ import java.nio.file.WatchService;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.security.auth.kerberos.ServicePermission;
 
 public class MonitorDir {
+
+    //https://www.youtube.com/watch?v=fcNp2SsWOeM
+    //The code below was taken from the link above
 
 	public static void main(String[] args) {
 
