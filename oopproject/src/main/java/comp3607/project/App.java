@@ -1,4 +1,4 @@
-package comp3607.project;   //very scared hope it works
+package comp3607.project; //very scared hope it works
 
 import java.util.*;
 import java.io.File;
@@ -6,23 +6,21 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
 
 // Steps from gather room 1
+//https://mkyong.com/java/how-to-get-file-path-separator-in-java/
 public final class App {
-    private ArrayList <AssignmentFiles> files = new ArrayList<>();
+    private ArrayList<AssignmentFiles> files = new ArrayList<>();
     static ArrayList<Student> students = new ArrayList<Student>();
 
-
-    public App(){
+    public App() {
 
     }
 
-
     public static String findCSVFilePath() {
-        File currentDir = new File("oopproject/FilesToRename");
+        String separator = System.getProperty("file.separator");
+        File currentDir = new File("oopproject" + separator + "FilesToRename");
 
         for (File file : currentDir.listFiles()) {
             if (file.getName().endsWith(".csv")) {
@@ -34,7 +32,7 @@ public final class App {
     }
 
     public static ArrayList<Student> readCSVFile() { // locates the CSV file in folder and reads the contents of the CSV
-        //ArrayList<Student> students = new ArrayList<Student>();
+        // ArrayList<Student> students = new ArrayList<Student>();
         try {
 
             File studentData = new File(findCSVFilePath());
@@ -69,11 +67,7 @@ public final class App {
                     tempSubStrings[i] = tempSubStrings[i].trim();
                 }
 
-                
-
                 Student student = new Student(tempSubStrings[1]);
-
-                
 
                 // Creating an Array of all names a student might have and adding that to the
                 // Names Arraylist in Students
@@ -104,31 +98,32 @@ public final class App {
         return students;
     }
 
-    public ArrayList<Student> getStudents(){
+    public ArrayList<Student> getStudents() {
         return this.students;
     }
 
-    public void addAssignments(){
-        File currentDir = new File("oopproject/FilesToRename"); // filepath
+    public void addAssignments() {
+        String separator = System.getProperty("file.separator");// this gets the delimiter of the operating system
+        File currentDir = new File("oopproject" + separator + "FilesToRename"); // filepath
 
-        for(File file:currentDir.listFiles()){
+        for (File file : currentDir.listFiles()) {
             String fileName = file.getName();
             files.add(new AssignmentFiles(fileName));
         }
 
     }
 
-    public void displayAssignmentName(int index){
-        for(int i=0; i<25; i++){
+    public void displayAssignmentName(int index) {
+        for (int i = 0; i < 25; i++) {
             index = i;
             System.out.println(files.get(index).toString());
         }
-        
+
     }
 
-   
     public static void copyFile(File nestedFolder, File folder) throws IOException {
-        String path = "oopproject/FilesToRename/renamedFiles/";
+        String separator = System.getProperty("file.separator");
+        String path = "oopproject" + separator + "FilesToRename" + separator + "renamedFiles" + separator;
         for (File file : folder.listFiles()) {
             if (file.getName().endsWith(".pdf")) {
                 // copy files from folder to nestedFolder
@@ -139,37 +134,19 @@ public final class App {
     }
 
     public static void renameFiles(File nestedFolder) {// user-defined function is used to rename files
-
-    // Convention 2 is "Name1 Name2_CCCCCC_assignsubmission_file_NNNNNN.pdf"        
-
+        String separator = System.getProperty("file.separator");
+        // Convention 2 is "Name1 Name2_CCCCCC_assignsubmission_file_NNNNNN.pdf"
         for (File file : nestedFolder.listFiles()) {
-            //double randomNum = Math.random();
+            // double randomNum = Math.random();
             String fileName = file.getName();
             AssignmentFiles temp = new AssignmentFiles(fileName);
             String renamed = temp.getRenamedFileName();
- 
-
-
-            File namingConvention2 = new File(nestedFolder + "/" + renamed);
+            File namingConvention2 = new File(nestedFolder + separator + renamed);
             file.renameTo(namingConvention2);
-            //File namingConvention3 = new File(nestedFolder + "/" + randomNum + ".docx");
-            
-            /*
-            if (file.getName().endsWith(".pdf")) {
-                System.out.println("file: " + file.getName());
-                file.renameTo(namingConvention2);
-            } 
-            else 
-                if (file.getName().endsWith(".docx")) {
-                    System.out.println("file: " + file.getName());
-                //file.renameTo(namingConvention3);
-                }
-                */
 
         }
     }
 
-    
     public static void main(String[] args) throws IOException {
 
         System.out.println("Hello World!");
@@ -178,18 +155,18 @@ public final class App {
         students = readCSVFile();// read .csv file
         System.out.println("=====================================================");
 
-        
         // ===============================================================================================
 
         // ========================================================================================
-        final File folder = new File("oopproject/FilesToRename");
-        File nestedFolder = new File(folder + "/renamedFiles");
+        String separator = System.getProperty("file.separator");// this gets the delimiter of the operating system
+
+        final File folder = new File("oopproject" + separator + "FilesToRename");
+        File nestedFolder = new File(folder + separator + "renamedFiles");
 
         if (folder.exists()) {
             nestedFolder.mkdir();// to create a folder/directory
             System.out.println("Folder created");
         }
-
 
         System.out.println("\n\n\n\n");
         App g = new App();
@@ -202,19 +179,15 @@ public final class App {
         System.out.println("=======================================");
         System.out.println("\n\t\t\t Test file names extraction...");
         System.out.println("=======================================");
-        
+
         g.displayAssignmentName(1);
 
         System.out.println("=======================================");
 
-
         System.out.println("\nTesting Student arraylist...\n");
         System.out.println(g.getStudents().get(15).getEmailAddress());
         System.out.println("\n=======================================");
-
-
-        
-
+        System.out.println(separator);
     }
 
 }
