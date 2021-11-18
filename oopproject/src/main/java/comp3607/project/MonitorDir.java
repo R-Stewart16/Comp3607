@@ -1,6 +1,5 @@
 package comp3607.project;
 
-import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,30 +7,40 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.security.auth.kerberos.ServicePermission;
 
 public class MonitorDir {
 
-	public static void main(String[] args) throws IOException,
-			InterruptedException {
+	public static void main(String[] args) {
 
-		Path faxFolder = Paths.get("FileToRename");
-		WatchService watchService = FileSystems.getDefault().newWatchService();
-		faxFolder.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
+        try (WatchService service = FileSystems.getDefault().newWatchService()){
+        Map<WatchKey, Path> keyMap = new HashMap<>();
+        
+        String separator = System.getProperty("file.separator");
+        System.out.println(separator);
 
-		boolean valid = true;
-		do {
-			WatchKey watchKey = watchService.take();
+        Path path = Paths.get("oopproject"+ separator +"FilesToRename");
 
-			for (WatchEvent event : watchKey.pollEvents()) {
-				WatchEvent.Kind kind = event.kind();
-				if (StandardWatchEventKinds.ENTRY_CREATE.equals(event.kind())) {
-					String fileName = event.context().toString();
-					System.out.println("File Created:" + fileName);
-				}
-			}
-			valid = watchKey.reset();
+        keyMap.put(path.register(service, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY,StandardWatchEventKinds.ENTRY_DELETE), path);
 
-		} while (valid);
+        WatchKey watchKey;
+            do{
+                watchKey = service.take();
+                Path eventDir = keyMap.get(watchKey);
 
+                for (WatchEvent event : watchKey.pollEvents()) {
+                    WatchEvent.Kind kind = event.kind();
+                    Path eventPath = (Path) event.context();
+                    System.out.println(eventDir + ": " + kind + ": "+ eventPath);
+                }
+
+            }while(watchKey.reset());
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
 	}
 }
