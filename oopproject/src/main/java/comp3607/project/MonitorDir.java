@@ -22,8 +22,6 @@ public class MonitorDir {
         Map<WatchKey, Path> keyMap = new HashMap<>();
         
         String separator = System.getProperty("file.separator");
-        System.out.println(separator);
-
         Path path = Paths.get("oopproject"+ separator +"FilesToRename");
 
         keyMap.put(path.register(service, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY,StandardWatchEventKinds.ENTRY_DELETE), path);
