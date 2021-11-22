@@ -42,10 +42,12 @@ public class FileToRename implements FolderDirectory {
             Map<WatchKey, Path> keyMap = new HashMap<>();
             
             String separator = System.getProperty("file.separator");
-            path = Paths.get("oopproject"+ separator +"FilesToRename");
+            path = Paths.get("code"+ separator +"FilesToRename");
     
-            keyMap.put(path.register(service, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY,StandardWatchEventKinds.ENTRY_DELETE), path);
+            keyMap.put(path.register(service, StandardWatchEventKinds.ENTRY_CREATE), path);
     
+            //keyMap.put(path.register(service, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY,StandardWatchEventKinds.ENTRY_DELETE), path);
+
             WatchKey watchKey;
                 do{
                     watchKey = service.take();
@@ -54,15 +56,16 @@ public class FileToRename implements FolderDirectory {
                     for (WatchEvent<?> event : watchKey.pollEvents()) {
                         WatchEvent.Kind<?> kind = event.kind();
                         Path eventPath = (Path) event.context();
-                        System.out.println(eventDir + ": " + kind + ": "+ eventPath);
-                        //System.out.println(eventPath.toString());
-                        //fileName = eventPath.toString();
+                        //System.out.println(eventDir + ": " + kind + ": "+ eventPath);
+                        //System.out.println("Is this the filename? "+eventPath.toString());
+                        fileName = eventPath.toString();
+                        notifyObserver();
                     }
     
                 }while(watchKey.reset());
                 
             } catch (Exception e) {
-                System.out.println("Main directory not found");
+                System.out.println("Error: Main directory not found");
             }
     }
 
