@@ -1,14 +1,9 @@
+package refactor.app;
 
 import java.util.*;
 
-/**
- * 
- */
 public class MatchStudentsToAssignment {
 
-    /**
-     * Default constructor
-     */
     public MatchStudentsToAssignment() {
     }
 
@@ -17,7 +12,7 @@ public class MatchStudentsToAssignment {
      * @param student 
      * @param asg
      */
-    public void match(Arraylist<Student> student, Arraylist<AssignmnetFiles> asg) {
+    public void match(ArrayList<Student> student, ArrayList<AssignmentFile> asg) {
         // TODO implement here
     }
 

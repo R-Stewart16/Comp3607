@@ -1,17 +1,11 @@
+package refactor.app;
 
 import java.util.*;
 
-/**
- * 
- */
 public class RenameFile {
 
-    /**
-     * Default constructor
-     */
     public RenameFile() {
     }
-
 
     /**
      * @param folderDir 
