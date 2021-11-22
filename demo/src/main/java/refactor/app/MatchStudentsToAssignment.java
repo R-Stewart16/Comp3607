@@ -12,8 +12,15 @@ public class MatchStudentsToAssignment {
      * @param student 
      * @param asg
      */
-    public void match(ArrayList<Student> student, ArrayList<AssignmentFile> asg) {
-        // TODO implement here
+    public void match(ArrayList<Student> students, ArrayList<AssignmentFile> asg) {
+        for(AssignmentFile temp: asg){
+            String[] tempAsgFileName = new String();
+            tempAsgFileName = temp.getDelimited();
+
+
+
+        }
+
     }
 
 }

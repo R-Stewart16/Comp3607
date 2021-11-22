@@ -25,6 +25,10 @@ public class AssignmentFile {
         return "";
     }
 
+    public String[] getDelimited(){ 
+        return fNameDelimited;
+    }
+    
     public String toString() {
         // TODO implement here
         return "";
