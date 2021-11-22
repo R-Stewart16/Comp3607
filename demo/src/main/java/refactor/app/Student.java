@@ -5,23 +5,25 @@ import java.util.*;
 public class Student {
 
     private ArrayList<String> names;
+    private String[] studentNames;  // primitive array
+
     private String participantID;
     private String emailAddress;
-    private ArrayList<String> assignments;
+
+    private AssignmentFile studentSubmission;   // assumes student can only submit one file. 
+    //private ArrayList<String> assignments;
     private String studentID;
 
     private boolean submitted;      //check over
 
-    public Student() {
-
-    }
-
-    public Student(String participantID, String studentID){
+    public Student(String participantID, String studentID, String[] names, String email){
         this.participantID = participantID;
         this.studentID = studentID;
+        this.studentNames = names;
+        this.emailAddress = email;
     }
     
-
+/*
     public void addName(ArrayList<String> name) {
         this.names = name;
     }
@@ -33,7 +35,12 @@ public class Student {
     public void addAssignment(String asg) {
         //check over
     }
+*/
 
+    public void storeStudentSubmission(AssignmentFile submission){
+        this.studentSubmission = submission;
+    }
+    
     public ArrayList<String> getNames() {
         return this.names;
     }
@@ -46,13 +53,14 @@ public class Student {
         return participantID;
     }
 
-    public String getAssignments() {
-        //check over
-        return "";
-    }
-
     public String getEmailAddress() {
         return this.emailAddress;
     }
+
+    public String getAssignments() {
+            //check over
+            return "";
+    }
+
 
 }

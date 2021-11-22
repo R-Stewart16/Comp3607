@@ -1,37 +1,34 @@
 package refactor.app;
 
+
 import java.util.*;
 
-public class AssignmentFile {
+public class AssignmentFile extends FileFixingDialog{
     
-    private String filename;
-    private String filenameDelimited;
-    private String renamedFileName;
+    private String fileName = new String();
+    private String[] fileNameDelimited;
+    private String renamedFileName = new String();
 
-    public AssignmentFile() {
+    public AssignmentFile(String fileName) {
+        this.fileName = fileName;
     }
 
-    public void splitName() {
-        // TODO implement here
+    public void splitFileName() {
+        this.fileNameDelimited = fileName.split("[_ -.,\\s+]");       //https://stackoverflow.com/questions/7899525/how-to-split-a-string-by-space
     }
 
     public String getFileName() {
-        // TODO implement here
-        return "";
+        return fileName;
     }
 
     public String getRenamedFileName() {
-        // TODO implement here
-        return "";
+        return renamedFileName;
     }
 
     public String[] getDelimited(){ 
-        return fNameDelimited;
+        return fileNameDelimited;
     }
     
-    public String toString() {
-        // TODO implement here
-        return "";
-    }
+    
 
 }

@@ -35,7 +35,7 @@ public class FileToRename implements FolderDirectory {
         observers.remove(o);
     }
 
-    public String monitorDirectory() {
+    public void monitorDirectory() {
 
         try (WatchService service = FileSystems.getDefault().newWatchService()){
             Map<WatchKey, Path> keyMap = new HashMap<>();

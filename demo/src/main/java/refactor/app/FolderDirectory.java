@@ -8,7 +8,7 @@ public interface FolderDirectory {
     public void notifyObserver();
     public void attach(Observer o);
     public void detach(Observer o);
-    public String monitorDirectory();
+    public void monitorDirectory();
     public Path getPath();
 
 }
