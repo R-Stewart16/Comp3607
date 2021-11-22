@@ -9,11 +9,6 @@ public class RenameFile extends FileFixingDialog{
         renameFile(student);
     }
 
-    /**
-     * @param folderDir 
-     * @param asg
-     */
-    
      /*
     public void Rename(String folderDir, AssignmentFile asg) {
         String renamedFileName = new String();

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll; //previously BeforeClass in Junit4
 import org.junit.jupiter.api.Test;
 
 //import org.junit.jupiter.api.DisplayName;
-import org.junit.Test;
+//import org.junit.Test;
 
 /**
  * Unit test for simple App.
@@ -31,7 +31,7 @@ public class StudentTest {
     // can renamed to initialiseLecturerObjects
     @BeforeEach
     public void setUp() {
-        beth = new Student("602637", "81305512", "");
+    //    beth = new Student("602637", "81305512", "");
     }
 
     @AfterEach

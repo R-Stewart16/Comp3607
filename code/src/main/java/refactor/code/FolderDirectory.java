@@ -1,7 +1,6 @@
 package refactor.code;
 
 import java.nio.file.Path;
-import java.util.*;
 
 public interface FolderDirectory {
 
