@@ -5,11 +5,12 @@ import java.io.File;
 
 public class FileFixingDialog implements Mediator {
 
-    private Collection<AssignmentFile> files;
-    private Collection<Student> students = new ArrayList<Student>();
-    private Collection<ProblemSubmissionFile> problemfiles;
+    private ArrayList <AssignmentFile> files;       //changed from collection to arraylist
+    private ArrayList <Student> students = new ArrayList<Student>();
+    private ArrayList<ProblemSubmissionFile> problemfiles;
 
     public FileFixingDialog() {
+        
     }
     
     public void listStudents() {            //can split into smaller methods... 
@@ -93,5 +94,11 @@ public class FileFixingDialog implements Mediator {
         // TODO implement here
     }
 
+    public ArrayList<Student> getStudents(){
+        return this.students;
+    }
 
+    public ArrayList<AssignmentFile> getAssignmentFiles(){
+        return this.files;
+    }
 }

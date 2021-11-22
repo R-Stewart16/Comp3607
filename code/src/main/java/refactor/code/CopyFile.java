@@ -2,12 +2,13 @@ package refactor.code;
 
 import java.util.*;
 
-public class CopyFile {
+public class CopyFile extends FileFixingDialog{
 
     public CopyFile() {
+        
     }
 
-    public void createNextedFolder() {
+    public void createNestedFolder() {
         // TODO implement here
     }
 

@@ -23,6 +23,7 @@ public class Student {
         this.emailAddress = email;
     }
     
+
 /*
     public void addName(ArrayList<String> name) {
         this.names = name;
@@ -39,10 +40,15 @@ public class Student {
 
     public void storeStudentSubmission(AssignmentFile submission){
         this.studentSubmission = submission;
+        submitted = true;
     }
     
     public ArrayList<String> getNames() {
         return this.names;
+    }
+
+    public String[] getNamesArr() {
+        return this.studentNames;
     }
 
     public String getStudentID() {
@@ -57,10 +63,15 @@ public class Student {
         return this.emailAddress;
     }
 
-    public String getAssignments() {
-            //check over
-            return "";
+    public String getAssignmentFileName() {
+        String fileName = studentSubmission.getFileName();
+        return fileName;
     }
 
+    public boolean getSubmissionState(){
+        return submitted;
+    }
+
+    
 
 }

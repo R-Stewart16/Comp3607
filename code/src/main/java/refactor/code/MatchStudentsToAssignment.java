@@ -4,7 +4,8 @@ import java.util.*;
 
 public class MatchStudentsToAssignment {
 
-    public MatchStudentsToAssignment() {
+    public MatchStudentsToAssignment(ArrayList<Student> students, ArrayList<AssignmentFile> asg) {
+        match(students, asg);
     }
 
 
@@ -12,6 +13,17 @@ public class MatchStudentsToAssignment {
      * @param student 
      * @param asg
      */
+
+    private boolean nameSearch(String fileName, String[] studentName){
+        for(int i = 0; i<studentName.length; i++){
+            if(fileName.contains(studentName[i]) && fileName.contains(studentName[i+1])){      //if student name is in file name then found //might get npe
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void match(ArrayList<Student> students, ArrayList<AssignmentFile> asg) {
         String[] delimitedFileName;
 
@@ -21,11 +33,11 @@ public class MatchStudentsToAssignment {
             for(int i = 0; i<delimitedFileName.length; i++){
                 
                 for(Student tempStudent: students){
-                    if(delimitedFileName[i].equals(tempStudent.getParticipantID()) || delimitedFileName[i].equals(tempStudent.getEmailAddress()) ||
-                        delimitedFileName[i].equals(tempStudent.getStudentID())  /*|| name search here */){
+                    if( delimitedFileName[i].equals(tempStudent.getParticipantID()) || delimitedFileName[i].equals(tempStudent.getEmailAddress()) ||
+                        delimitedFileName[i].equals(tempStudent.getStudentID())  || nameSearch(delimitedFileName[i], tempStudent.getNamesArr()) ){
                             //student found i.e. matched student to file.
                             //add curr asg to curr student in filefixing dialog
-                        
+                            
                     
                     }
                     
