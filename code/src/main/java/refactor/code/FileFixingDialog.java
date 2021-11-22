@@ -3,7 +3,7 @@ package refactor.code;
 import java.util.*;
 import java.io.File;
 
-public class FileFixingDialog implements Observer, Mediator {
+public class FileFixingDialog implements Mediator {
 
     private Collection<AssignmentFile> files;
     private Collection<Student> students = new ArrayList<Student>();
@@ -86,22 +86,12 @@ public class FileFixingDialog implements Observer, Mediator {
             System.out.println(e.toString());
         }
 
-
-    
-        
         //System.out.println("File not found");
-    }
-
-
-
-
-
-    public void update() {
-        // TODO implement here
     }
 
     public void notify(Object sender, Object event) {
         // TODO implement here
     }
+
 
 }

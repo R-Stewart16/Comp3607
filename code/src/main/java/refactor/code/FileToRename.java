@@ -16,14 +16,15 @@ public class FileToRename implements FolderDirectory {
     
     private Path path;
     private ArrayList<Observer> observers;
+    private String fileName;
 
     public FileToRename() {
-        monitorDirectory();
+        observers = new ArrayList<Observer>();
     }
 
     public void notifyObserver() {
         for (Observer o : observers){
-            o.update();
+            o.update(fileName);
         }
     }
 
@@ -50,16 +51,18 @@ public class FileToRename implements FolderDirectory {
                     watchKey = service.take();
                     Path eventDir = keyMap.get(watchKey);
     
-                    for (WatchEvent event : watchKey.pollEvents()) {
-                        WatchEvent.Kind kind = event.kind();
+                    for (WatchEvent<?> event : watchKey.pollEvents()) {
+                        WatchEvent.Kind<?> kind = event.kind();
                         Path eventPath = (Path) event.context();
                         System.out.println(eventDir + ": " + kind + ": "+ eventPath);
+                        //System.out.println(eventPath.toString());
+                        //fileName = eventPath.toString();
                     }
     
                 }while(watchKey.reset());
                 
             } catch (Exception e) {
-                //TODO: handle exception
+                System.out.println("Main directory not found");
             }
     }
 
