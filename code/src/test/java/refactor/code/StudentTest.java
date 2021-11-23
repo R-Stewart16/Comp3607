@@ -31,7 +31,7 @@ public class StudentTest {
     // can renamed to initialiseLecturerObjects
     @BeforeEach
     public void setUp() {
-    //    beth = new Student("602637", "81305512", "");
+        beth = new Student("602637", "81305512", "BethMorales-Horton", "beth.moraleshorton@my.uwi.edu");
     }
 
     @AfterEach
