@@ -8,12 +8,6 @@ public class MatchStudentsToAssignment {
         match(students, asg);
     }
 
-
-    /**
-     * @param student 
-     * @param asg
-     */
-
     private boolean nameSearch(String fileName, String[] studentName){
         for(int i = 0; i<studentName.length; i++){
             if(fileName.contains(studentName[i]) && fileName.contains(studentName[i+1])){      //if student name is in file name then found //might get npe
@@ -37,19 +31,9 @@ public class MatchStudentsToAssignment {
                         delimitedFileName[i].equals(tempStudent.getStudentID())  || nameSearch(delimitedFileName[i], tempStudent.getNamesArr()) ){
                             //student found i.e. matched student to file.
                             //add curr asg to curr student in filefixing dialog
-                            
-                    
-                    }
-                    
+                    } 
                 }
-
-
             }
-
-
-
         }
-
     }
-
 }
