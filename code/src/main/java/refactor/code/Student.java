@@ -80,6 +80,7 @@ public class Student {
         for (String n: studentNames){
             details += n + " ";
         }  
+        details += "\nSubmitted file is :" +studentSubmission + "\n";
         return details;
     }
 

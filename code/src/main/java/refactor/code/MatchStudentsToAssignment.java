@@ -4,8 +4,7 @@ import java.util.*;
 
 public class MatchStudentsToAssignment {
 
-    public MatchStudentsToAssignment(ArrayList<Student> students, ArrayList<AssignmentFile> asg) {
-        match(students, asg);
+    public MatchStudentsToAssignment() {
     }
 
     private boolean nameSearch(String fileName, String[] studentName){
@@ -17,22 +16,24 @@ public class MatchStudentsToAssignment {
         return false;
     }
 
-    public void match(ArrayList<Student> students, ArrayList<AssignmentFile> asg) {
+    public boolean match(ArrayList<String> studentIdentificationMarkers, String[] asgFileName) {
+        
         String[] delimitedFileName;
-
-        for(AssignmentFile temp: asg){
-            delimitedFileName = temp.getDelimited();
+            delimitedFileName = asgFileName;
 
             for(int i = 0; i<delimitedFileName.length; i++){
                 
-                for(Student tempStudent: students){
-                    if( delimitedFileName[i].equals(tempStudent.getParticipantID()) || delimitedFileName[i].equals(tempStudent.getEmailAddress()) ||
-                        delimitedFileName[i].equals(tempStudent.getStudentID())  || nameSearch(delimitedFileName[i], tempStudent.getNamesArr()) ){
+                for(String id: studentIdentificationMarkers){
+                    if( delimitedFileName[i].equals(id) || delimitedFileName[i].equals(id) ||
+                        delimitedFileName[i].equals(id) /*|| nameSearch(delimitedFileName[i], id)*/ ){
                             //student found i.e. matched student to file.
                             //add curr asg to curr student in filefixing dialog
+                            return true;
                     } 
                 }
             }
-        }
+        return false;
     }
+
+
 }

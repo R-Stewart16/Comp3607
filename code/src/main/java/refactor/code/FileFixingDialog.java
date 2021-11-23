@@ -10,7 +10,7 @@ public class FileFixingDialog implements Mediator {
     private ArrayList<AssignmentFile> files;       //changed from collection to arraylist
     private ArrayList<Student> students;
     private ArrayList<ProblemSubmissionFile> problemfiles;
-    private String newAssignmentFileName;
+    private AssignmentFile newAssignmentFile;
 
     public FileFixingDialog() {
         students = new ArrayList<Student>();
@@ -19,17 +19,40 @@ public class FileFixingDialog implements Mediator {
     }
 
     public void updateMediator(String filename, Path path) {
+        if (students.isEmpty()){
+            createStudentList();
+            //students.toString();
+        }
+        newAssignmentFile = new AssignmentFile(filename);
         files.add(new AssignmentFile(filename));
         //System.out.println("Mediator has recieved file named : "+ filename);
         //System.out.println(files);
         //printAssignmentFiles();
         NestedFolder nestedFolder = new NestedFolder(path);
         File f = new File(path.toString());
+
         try{
             nestedFolder.copyFiles(f);
         } catch (IOException e){
             System.out.println("Cannot copy file");
         }
+
+        for (Student s: students){
+
+            ArrayList<String> idMarkers = new ArrayList<String>();
+            idMarkers.add(s.getParticipantID());
+            //idMarkers.addAll(s.getNames());
+            idMarkers.add(s.getStudentID());
+
+            MatchStudentsToAssignment matchingComponent = new MatchStudentsToAssignment();
+            if (matchingComponent.match(idMarkers, newAssignmentFile.getDelimited())){
+                s.storeStudentSubmission(filename);
+                System.out.println(s.toString());
+            } else {
+                s.storeStudentSubmission("Submission not found");
+            }
+        }
+
     }
 
     public void printAssignmentFiles(){
@@ -38,8 +61,7 @@ public class FileFixingDialog implements Mediator {
         }
     }
 
-    
-    public void listStudents() {            //can split into smaller methods... 
+    public void createStudentList() {            //can split into smaller methods... 
         File currentDir = new File("code/FilesToRename");
         String csvPath = new String();
         
@@ -63,7 +85,7 @@ public class FileFixingDialog implements Mediator {
             while (scan.hasNextLine()) {
 
                 line = scan.nextLine();
-                System.out.println(line);
+                //System.out.println(line);
                 temp = line.split(",");
 
                 // Iterate through the array of strings and trims all whitespaces.
@@ -122,7 +144,7 @@ public class FileFixingDialog implements Mediator {
 
     public ArrayList<Student> getStudents(){
         if (students.isEmpty())
-            listStudents();
+            createStudentList();
         return this.students;
     }
 
