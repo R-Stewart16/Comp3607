@@ -5,16 +5,30 @@ import java.io.File;
 
 public class FileFixingDialog implements Mediator {
 
-    private ArrayList <AssignmentFile> files;       //changed from collection to arraylist
-    private ArrayList <Student> students = new ArrayList<Student>();
+    private ArrayList<AssignmentFile> files;       //changed from collection to arraylist
+    private ArrayList<Student> students;
     private ArrayList<ProblemSubmissionFile> problemfiles;
+    private String newAssignmentFileName;
 
     public FileFixingDialog() {
-        
+        students = new ArrayList<Student>();
+        files = new ArrayList<AssignmentFile>();
+        problemfiles = new ArrayList<ProblemSubmissionFile>();
     }
+
+    public void updateMediator(String filename) {
+        files.add(new AssignmentFile(filename));
+        //System.out.println("Mediator has recieved file named : "+ filename);
+        //System.out.println(files);
+        for(AssignmentFile a: files){
+            a.toString();
+        }
+
+    }
+
     
     public void listStudents() {            //can split into smaller methods... 
-        File currentDir = new File("oopproject/FilesToRename");
+        File currentDir = new File("code/FilesToRename");
         String csvPath = new String();
         
         for (File file : currentDir.listFiles()) {
@@ -37,6 +51,7 @@ public class FileFixingDialog implements Mediator {
             while (scan.hasNextLine()) {
 
                 line = scan.nextLine();
+                System.out.println(line);
                 temp = line.split(",");
 
                 // Iterate through the array of strings and trims all whitespaces.
@@ -67,7 +82,6 @@ public class FileFixingDialog implements Mediator {
                     //students.addName(names[i].trim());
                 }
                 
-
                 // Adding the student ID
                 temp[2] = temp[2].trim();
                 //students.addStudentID(temp[2]);
@@ -95,10 +109,13 @@ public class FileFixingDialog implements Mediator {
     }
 
     public ArrayList<Student> getStudents(){
+        if (students.isEmpty())
+            listStudents();
         return this.students;
     }
 
     public ArrayList<AssignmentFile> getAssignmentFiles(){
         return this.files;
     }
+
 }

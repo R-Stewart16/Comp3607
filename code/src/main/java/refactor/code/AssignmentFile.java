@@ -11,6 +11,7 @@ public class AssignmentFile extends FileFixingDialog{
 
     public AssignmentFile(String fileName) {
         this.fileName = fileName;
+        splitFileName();
     }
 
     public void splitFileName() {
@@ -29,6 +30,9 @@ public class AssignmentFile extends FileFixingDialog{
         return fileNameDelimited;
     }
     
-    
-
+    public String toString(){
+        String detail = "";
+        detail += "AssignmentFile has Recieved :" + fileName;
+        return detail;
+    }
 }

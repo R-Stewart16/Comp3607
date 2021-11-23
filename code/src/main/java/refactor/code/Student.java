@@ -72,6 +72,15 @@ public class Student {
         return submitted;
     }
 
-    
+    public String toString(){
+        String details = "";
+        details += "Participant ID: "+ participantID + " ";
+        details += "Student ID: "+ studentID + " ";
+        details += "Student names: ";
+        for (String n: studentNames){
+            details += n + " ";
+        }  
+        return details;
+    }
 
 }
