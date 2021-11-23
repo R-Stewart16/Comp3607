@@ -5,11 +5,12 @@ import java.util.*;
 
 public class AssignmentFile extends FileFixingDialog{
     
-    private String fileName = new String();
+    private String fileName;
     private String[] fileNameDelimited;
-    private String renamedFileName = new String();
+    private String renamedFileName;
 
     public AssignmentFile(String fileName) {
+
         this.fileName = fileName;
         splitFileName();
     }

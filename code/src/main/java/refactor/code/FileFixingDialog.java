@@ -2,6 +2,8 @@ package refactor.code;
 
 import java.util.*;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public class FileFixingDialog implements Mediator {
 
@@ -16,14 +18,24 @@ public class FileFixingDialog implements Mediator {
         problemfiles = new ArrayList<ProblemSubmissionFile>();
     }
 
-    public void updateMediator(String filename) {
+    public void updateMediator(String filename, Path path) {
         files.add(new AssignmentFile(filename));
         //System.out.println("Mediator has recieved file named : "+ filename);
         //System.out.println(files);
+        //printAssignmentFiles();
+        NestedFolder nestedFolder = new NestedFolder(path);
+        File f = new File(path.toString());
+        try{
+            nestedFolder.copyFiles(f);
+        } catch (IOException e){
+            System.out.println("Cannot copy file");
+        }
+    }
+
+    public void printAssignmentFiles(){
         for(AssignmentFile a: files){
             a.toString();
         }
-
     }
 
     

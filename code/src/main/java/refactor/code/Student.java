@@ -10,7 +10,7 @@ public class Student {
     private String participantID;
     private String emailAddress;
 
-    private AssignmentFile studentSubmission;   // assumes student can only submit one file. 
+    private String studentSubmission;   // assumes student can only submit one file. 
     //private ArrayList<String> assignments;
     private String studentID;
 
@@ -38,7 +38,7 @@ public class Student {
     }
 */
 
-    public void storeStudentSubmission(AssignmentFile submission){
+    public void storeStudentSubmission(String submission){
         this.studentSubmission = submission;
         submitted = true;
     }
@@ -64,8 +64,8 @@ public class Student {
     }
 
     public String getAssignmentFileName() {
-        String fileName = studentSubmission.getFileName();
-        return fileName;
+        //String fileName = studentSubmission.getFileName();
+        return studentSubmission;
     }
 
     public boolean getSubmissionState(){

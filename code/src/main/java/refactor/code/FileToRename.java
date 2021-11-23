@@ -24,7 +24,7 @@ public class FileToRename implements FolderDirectory {
 
     public void notifyObserver() {
         for (Observer o : observers){
-            o.update(fileName);
+            o.update(fileName, path);
         }
     }
 
