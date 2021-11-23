@@ -14,7 +14,6 @@ public class MatchStudentsToAssignment {
                 return true;
             }
         }
-
         return false;
     }
 
