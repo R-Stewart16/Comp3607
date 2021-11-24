@@ -42,7 +42,6 @@ public class RenameFile extends FileFixingDialog{
         // if(fileName.endsWith(".docx")){
         //     renamedFileName+=".docx";
         // }
-        renamedFileName+="\n";
         
         System.out.println();
         System.out.println(renamedFileName);
@@ -62,19 +61,18 @@ public class RenameFile extends FileFixingDialog{
                 System.out.println("Renamed folder content :"+ fileName);
                 System.out.println(path.toString()+separator+fileName);
 
-                // File namingConvention2 = new File(nestedfolder + separator + newName);
-                // //Thread.sleep(2000);
-                // if(file.renameTo(namingConvention2))
-                //     System.out.println("File was renamed successfully");
-                // else 
-                //     System.out.println("Failed to rename");
-                 try {
-                    Files.move(Paths.get(source), Paths.get("code").resolveSibling(newName));
-                    System.out.println("File Successfully Rename");
-                }
-                catch (IOException e) {
-                    System.out.println("operation failed");
-                }
+                File namingConvention2 = new File(nestedfolder + separator + newName);
+                if(file.renameTo(namingConvention2))
+                    System.out.println("File was renamed successfully");
+                else 
+                    System.out.println("Failed to rename");
+                //  try {
+                //     Files.move(Paths.get(source), Paths.get("code").resolveSibling(newName));
+                //     System.out.println("File Successfully Rename");
+                // }
+                // catch (IOException e) {
+                //     System.out.println("operation failed");
+                // }
             }
         } 
     }

@@ -33,10 +33,10 @@ public class FileFixingDialog implements Mediator {
 
         //creating new nested folder and copying files
         NestedFolder nestedFolder = new NestedFolder(path);
-        File f = new File(path.toString());
+        File f = new File(path.toString()+ "/" + filename);
 
         try{
-            nestedFolder.copyFiles(f);
+            nestedFolder.copyFile(f);
         } catch (IOException e){
             System.out.println("Cannot copy file");
         }

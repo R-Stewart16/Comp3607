@@ -25,14 +25,14 @@ public class NestedFolder extends FileFixingDialog{
         }
     }
 
-    public void copyFiles(File folder) throws IOException {
+    public void copyFile(File newFile) throws IOException {
         String path = "code/FilesToRename/renamedFiles/";
-        for (File file : folder.listFiles()) {
-            if (file.getName().endsWith(".pdf")) {
+        //for (File file : folder.listFiles()) {
+            if (newFile.getName().endsWith(".pdf")) {
                 // copy files from folder to nestedFolder
-                Files.copy(file.toPath(), (new File(path + file.getName())).toPath(),StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(newFile.toPath(), (new File(path + newFile.getName())).toPath()/*,StandardCopyOption.REPLACE_EXISTING*/);
             }
-        }
+        //}
     }
 
     public Path getNestedFolderPath(){
