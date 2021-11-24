@@ -7,19 +7,22 @@ import java.util.*;
 
 public class NestedFolder extends FileFixingDialog{
 
+    private File folder;
+    private File nestedFolder;
+
+
     public NestedFolder(Path path) {
         createNestedFolder(path);
     }
 
     public void createNestedFolder(Path path) {
-        final File folder = new File(path.toString());
-        File nestedFolder = new File(folder + "/renamedFiles");
+        folder = new File(path.toString());
+        nestedFolder = new File(folder + "/renamedFiles");
 
         if (folder.exists() && !nestedFolder.exists()) {
             nestedFolder.mkdir();// to create a folder/directory
             System.out.println("Folder created");
         }
-        
     }
 
     public void copyFiles(File folder) throws IOException {
@@ -32,4 +35,8 @@ public class NestedFolder extends FileFixingDialog{
         }
     }
 
+    public Path getNestedFolderPath(){
+        return nestedFolder.toPath();
+    }
+    
 }

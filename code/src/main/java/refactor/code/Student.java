@@ -17,10 +17,19 @@ public class Student {
     private boolean submitted;      //check over
 
     public Student(String participantID, String studentID, String[] names, String email){
+        this.names = new ArrayList<String>();
+        createArraylistOfNames(names);
         this.participantID = participantID;
         this.studentID = studentID;
         this.studentNames = names;
         this.emailAddress = email;
+        this.submitted = false;
+    }
+
+    private void createArraylistOfNames(String[] names){
+        for(int i=0; i<names.length; i++){
+            this.names.add(names[i]);
+        }
     }
     
 
@@ -44,7 +53,7 @@ public class Student {
     }
     
     public ArrayList<String> getNames() {
-        return this.names;
+        return names;
     }
 
     public String[] getNamesArr() {

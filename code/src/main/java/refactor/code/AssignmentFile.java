@@ -7,7 +7,7 @@ public class AssignmentFile extends FileFixingDialog{
     
     private String fileName;
     private String[] fileNameDelimited;
-    private String renamedFileName;
+    //private String renamedFileName;
 
     public AssignmentFile(String fileName) {
 
@@ -23,9 +23,9 @@ public class AssignmentFile extends FileFixingDialog{
         return fileName;
     }
 
-    public String getRenamedFileName() {
-        return renamedFileName;
-    }
+    // public String getRenamedFileName() {
+    //     return renamedFileName;
+    // }
 
     public String[] getDelimited(){ 
         return fileNameDelimited;

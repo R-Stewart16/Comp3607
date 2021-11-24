@@ -11,6 +11,7 @@ public class FileFixingDialog implements Mediator {
     private ArrayList<Student> students;
     private ArrayList<ProblemSubmissionFile> problemfiles;
     private AssignmentFile newAssignmentFile;
+    private RenameFile rename;
 
     public FileFixingDialog() {
         students = new ArrayList<Student>();
@@ -19,6 +20,7 @@ public class FileFixingDialog implements Mediator {
     }
 
     public void updateMediator(String filename, Path path) {
+        //find teh csv and create an collection of students
         if (students.isEmpty()){
             createStudentList();
             //students.toString();
@@ -28,6 +30,8 @@ public class FileFixingDialog implements Mediator {
         //System.out.println("Mediator has recieved file named : "+ filename);
         //System.out.println(files);
         //printAssignmentFiles();
+
+        //creating new nested folder and copying files
         NestedFolder nestedFolder = new NestedFolder(path);
         File f = new File(path.toString());
 
@@ -37,8 +41,8 @@ public class FileFixingDialog implements Mediator {
             System.out.println("Cannot copy file");
         }
 
+        // Matching students to assignments
         for (Student s: students){
-
             ArrayList<String> idMarkers = new ArrayList<String>();
             idMarkers.add(s.getParticipantID());
             //idMarkers.addAll(s.getNames());
@@ -51,6 +55,17 @@ public class FileFixingDialog implements Mediator {
             } else {
                 s.storeStudentSubmission("Submission not found");
             }
+        }
+
+        //renaming files
+        rename = new RenameFile(nestedFolder.getNestedFolderPath());
+        for (Student s: students){
+            
+            if (s.getSubmissionState() && filename.equals(s.getAssignmentFileName())
+            ){
+                rename.changeFileName(s.getNames(), s.getParticipantID(), filename);
+            }
+            //rename.changeFileName();
         }
 
     }
