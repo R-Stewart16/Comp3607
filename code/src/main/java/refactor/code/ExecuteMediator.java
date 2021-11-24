@@ -2,7 +2,7 @@ package refactor.code;
 
 import java.nio.file.Path;
 
-public class ExecuteMediator implements Observer { // aka instigator
+public class ExecuteMediator implements Observer {
 
     FileFixingDialog fixer;
 
