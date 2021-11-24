@@ -48,11 +48,11 @@ public class RenameFileTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void changeFileNameTest() {
-        System.out.println("changeFileName()");
-        // assertEquals("code/filestorename/", renamedFile.changeFileName(studentNames,
-        // participantID, fileName));// not working correctly
-    }
+    // @Test
+    // public void changeFileNameTest() {
+    // System.out.println("changeFileName()");
+    // renamedFile.changeFileName(studentNames, participantID, fileName);
+
+    // }
 
 }
