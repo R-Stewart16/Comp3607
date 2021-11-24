@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
  */
 public class StudentTest {
     private Student beth;
-    private String[] studentNames = { "BethMorale" };
+    private String[] studentNames = { "BethMorales-Horton" };
 
     public StudentTest() {
     }
@@ -44,7 +44,7 @@ public class StudentTest {
 
     @Test
     public void testgetPartipantID() {
-        System.out.println("getPartipantID");
+        System.out.println("getPartipantID()");
         String expResult = "602637";
         String result = beth.getParticipantID();
         assertEquals(expResult, result);
@@ -52,7 +52,7 @@ public class StudentTest {
 
     @Test
     public void testgetStudentID() {
-        System.out.println("getStudentID");
+        System.out.println("getStudentID()");
         String expResult = "81305512";
         String result = beth.getStudentID();
         assertEquals(expResult, result);
@@ -60,7 +60,7 @@ public class StudentTest {
 
     // @Test
     // public void testgetNames() {
-    // System.out.println("getgetNames");
+    // System.out.println("getNames()");
     // String expResult = "BethMorale";
     // ArrayList<String> result = beth.getNames();
     // assertEquals(expResult, result);
@@ -76,7 +76,7 @@ public class StudentTest {
 
     @Test
     public void testgetAssignmentFileName() {
-        System.out.println("getAssignmentFileName");
+        System.out.println("getAssignmentFileName()");
         String result = beth.getParticipantID();
         assertNotNull(result);
     }
