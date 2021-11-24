@@ -4,6 +4,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.nio.file.Path;
 import java.util.*;
 
@@ -37,14 +41,14 @@ public class RenameFileTest {
     public void generateNewNameTest() {
         System.out.println("getgeneratedFile");
         String results = renamedFile.generateNewName(studentNames, participantID, fileName);
-        // assertNotNull(results);
+        assertNotNull(results);
     }
 
     @Test
     public void changeFileNameTest() {
         System.out.println("changefilename");
-        // assertEquals("", renamedFile.changeFileName(studentNames, participantID,
-        // fileName));
+        // assertEquals("hh", renamedFile.changeFileName(studentNames, participantID,
+        // fileName));// not working correctly
     }
 
 }
