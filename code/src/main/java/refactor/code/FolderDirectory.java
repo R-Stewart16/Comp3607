@@ -11,6 +11,5 @@ public interface FolderDirectory {
     public void detach(Observer o);
 
     public void monitorDirectory();
-    // p ublic Path getPath();
 
 }

@@ -5,11 +5,9 @@ import java.util.*;
 public class Student {
 
     private ArrayList<String> names;
-    private String[] studentNames; // primitive array
     private String participantID;
     private String emailAddress;
     private String studentSubmission; // assumes student can only submit one file.
-    // private ArrayList<String> assignments;
     private String studentID;
 
     private boolean submitted; // check over
@@ -19,7 +17,6 @@ public class Student {
         createArraylistOfNames(names);
         this.participantID = participantID;
         this.studentID = studentID;
-        this.studentNames = names;
         this.emailAddress = email;
         this.submitted = false;
     }
@@ -39,9 +36,6 @@ public class Student {
         return names;
     }
 
-    // public String[] getNamesArr() {
-    // return this.studentNames;
-    // }
 
     public String getStudentID() {
         return studentID;
@@ -68,7 +62,7 @@ public class Student {
         details += "Participant ID: " + participantID + " ";
         details += "Student ID: " + studentID + " ";
         details += "Student names: ";
-        for (String n : studentNames) {
+        for (String n : names) {
             details += n + " ";
         }
         return details;

@@ -2,6 +2,7 @@ package refactor.code;
 
 import java.nio.file.Path;
 import java.util.*;
+import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -19,12 +20,18 @@ public class FileToRename implements FolderDirectory {
 
     public FileToRename() {
         observers = new ArrayList<Observer>();
+        generatePath();
     }
 
     public void notifyObserver() {
         for (Observer o : observers) {
             o.update(fileName, path);
         }
+    }
+
+    public void generatePath(){
+        String separator = System.getProperty("file.separator");
+        path = Paths.get("code" + separator + "FilesToRename");
     }
 
     public void attach(Observer o) {
@@ -36,25 +43,18 @@ public class FileToRename implements FolderDirectory {
     }
 
     public void monitorDirectory() {
-
+        initialCheck();
         try (WatchService service = FileSystems.getDefault().newWatchService()) {
             Map<WatchKey, Path> keyMap = new HashMap<>();
-
-            String separator = System.getProperty("file.separator");
-            path = Paths.get("code" + separator + "FilesToRename");
 
             keyMap.put(path.register(service, StandardWatchEventKinds.ENTRY_CREATE), path);
 
             WatchKey watchKey;
             do {
                 watchKey = service.take();
-                // Path eventDir = keyMap.get(watchKey);
-
+                
                 for (WatchEvent<?> event : watchKey.pollEvents()) {
-                    // WatchEvent.Kind<?> kind = event.kind();
                     Path eventPath = (Path) event.context();
-                    // System.out.println(eventDir + ": " + kind + ": "+ eventPath);
-                    // System.out.println("Is this the filename? "+eventPath.toString());
                     fileName = eventPath.toString();
                     if (fileName.equals("renamedFiles"))
                         continue;
@@ -68,8 +68,22 @@ public class FileToRename implements FolderDirectory {
         }
     }
 
-    // public Path getPath() {
-    // return path;
-    // }
+    public void initialCheck(){
+        //int amtFiles;
+        System.out.println("in init check");
+        File rootfolder = new File(path.toString());
+        if(rootfolder.listFiles().length != 0){
+            for(File file : rootfolder.listFiles()){
+                fileName = file.getName();
+                System.out.println("\t\t\tnotifying observer");
+                if(!fileName.endsWith(".csv")){
+                    notifyObserver();
+                } 
+            }  
+        }
+         
+    }
+
+
 
 }

@@ -3,7 +3,6 @@ package refactor.code;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-// import java.util.*;
 
 public class NestedFolder extends FileFixingDialog {
 
@@ -26,13 +25,10 @@ public class NestedFolder extends FileFixingDialog {
 
     public void copyFile(File newFile) throws IOException {
         String path = "code/FilesToRename/renamedFiles/";
-        // for (File file : folder.listFiles()) {
         if (!newFile.isDirectory()) {
-            // copy files from folder to nestedFolder
             Files.copy(newFile.toPath(),
                     (new File(path + newFile.getName())).toPath()/* ,StandardCopyOption.REPLACE_EXISTING */);
         }
-        // }
     }
 
     public Path getNestedFolderPath() {
