@@ -63,7 +63,12 @@ public class FileFixingDialog implements Mediator {
             
             if (s.getSubmissionState() && filename.equals(s.getAssignmentFileName())
             ){
-                rename.changeFileName(s.getNames(), s.getParticipantID(), filename);
+                try {
+                    rename.changeFileName(s.getNames(), s.getParticipantID(), filename);
+                } catch(Exception e) {
+                    System.out.println("rename failed");
+                }
+                
             }
             //rename.changeFileName();
         }
