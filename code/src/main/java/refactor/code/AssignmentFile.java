@@ -1,3 +1,5 @@
+
+
 package refactor.code;
 
 public class AssignmentFile extends FileFixingDialog {
@@ -11,6 +13,7 @@ public class AssignmentFile extends FileFixingDialog {
         splitFileName();
     }
 
+    
     public void splitFileName() {
         this.fileNameDelimited = fileName.split("[_ -.,\\s+]");
         // https://stackoverflow.com/questions/7899525/how-to-split-a-string-by-space

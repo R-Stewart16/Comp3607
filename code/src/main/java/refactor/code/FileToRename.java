@@ -60,6 +60,8 @@ public class FileToRename implements FolderDirectory {
                         continue;
                     notifyObserver();
                 }
+                
+                
 
             } while (watchKey.reset());
 
@@ -69,19 +71,15 @@ public class FileToRename implements FolderDirectory {
     }
 
     public void initialCheck(){
-        //int amtFiles;
-        System.out.println("in init check");
         File rootfolder = new File(path.toString());
         if(rootfolder.listFiles().length != 0){
             for(File file : rootfolder.listFiles()){
                 fileName = file.getName();
-                System.out.println("\t\t\tnotifying observer");
-                if(!fileName.endsWith(".csv")){
+                if(!fileName.endsWith(".csv") && !(fileName.equals("renamedFiles"))){
                     notifyObserver();
                 } 
             }  
-        }
-         
+        }  
     }
 
 

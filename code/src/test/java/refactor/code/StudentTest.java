@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach; //previously Before
 import org.junit.jupiter.api.BeforeAll; //previously BeforeClass in Junit4
 import org.junit.jupiter.api.Test;
 
-/**
+/***
  * Unit test for Student.java class.
  */
 public class StudentTest {

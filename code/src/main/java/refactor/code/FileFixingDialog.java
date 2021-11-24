@@ -14,6 +14,7 @@ public class FileFixingDialog implements Mediator {
     private NestedFolder nestedFolder;
     private ArrayList<String> missingSubmissions;
     private ArrayList<String> problemSubmissions;
+    private String seperator = System.getProperty("file.separator");
 
     public FileFixingDialog() {
         students = new ArrayList<Student>();
@@ -53,12 +54,13 @@ public class FileFixingDialog implements Mediator {
         if (students.isEmpty()) {
             createStudentList(path);
         }
+
         newAssignmentFile = new AssignmentFile(filename);
         files.add(new AssignmentFile(filename));
 
         // creating new nested folder and copying files
         nestedFolder = new NestedFolder(path);
-        File f = new File(path.toString() + "/" + filename);
+        File f = new File(path.toString() + seperator + filename);
 
         try {
             nestedFolder.copyFile(f);
@@ -66,47 +68,9 @@ public class FileFixingDialog implements Mediator {
             System.out.println("Cannot copy file");
         }
 
-//------------------
-/*
-        boolean matched = false; // Matching students to assignments
-        for (Student s : students) {
-            ArrayList<String> idMarkers = new ArrayList<String>();
-            idMarkers.add(s.getParticipantID());
-            idMarkers.add(s.getStudentID());
-            idMarkers.add(s.getEmailAddress());
-            //idMarkers.addAll(s.getNames());
-
-            MatchStudentsToAssignment matchingComponent = new MatchStudentsToAssignment();
-            if (matchingComponent.match(idMarkers, newAssignmentFile.getDelimited(), filename)) {
-                matched = true;
-                s.storeStudentSubmission(filename);
-                //System.out.println(s.toString());
-                //System.out.println("Submitted filename: "+filename);
-
-                missingSubmissions.remove(s.toString());
-
-            } else {
-                s.storeStudentSubmission("Submission not found");
-            }
-        }
-
-        if (!matched)
-            problemSubmissions.add(filename);
-*/
         matchStudents(filename);
-        renameFile(filename);
-/*
-        rename = new RenameFile(nestedFolder.getNestedFolderPath());
-        for (Student s : students) {
-            if (s.getSubmissionState() && filename.equals(s.getAssignmentFileName())) {
-                try {
-                    rename.changeFileName(s.getNames(), s.getParticipantID(), filename);
-                } catch (Exception e) {
-                    System.out.println("rename failed");
-                }
-            }
-        }
-*/
+        renameFile(filename);  
+
         System.out.println("Number of missing files: " + missingSubmissions.size());
         System.out.println("Number of problem files: " + problemSubmissions.size());
         for (String m : problemSubmissions) {
