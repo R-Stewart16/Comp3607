@@ -7,91 +7,101 @@ import java.nio.file.Path;
 
 public class FileFixingDialog implements Mediator {
 
-    private ArrayList<AssignmentFile> files;       //changed from collection to arraylist
+    private ArrayList<AssignmentFile> files;
     private ArrayList<Student> students;
-    private ArrayList<ProblemSubmissionFile> problemfiles;
     private AssignmentFile newAssignmentFile;
     private RenameFile rename;
+    private ArrayList<String> missingSubmissions;
+    private ArrayList<String> problemSubmissions;
 
     public FileFixingDialog() {
         students = new ArrayList<Student>();
         files = new ArrayList<AssignmentFile>();
-        problemfiles = new ArrayList<ProblemSubmissionFile>();
+        missingSubmissions = new ArrayList<String>();
+        problemSubmissions = new ArrayList<String>();
     }
 
     public void updateMediator(String filename, Path path) {
-        //find teh csv and create an collection of students
-        if (students.isEmpty()){
+        // find the csv and create an collection of students
+
+        if (students.isEmpty()) {
             createStudentList();
-            //students.toString();
         }
         newAssignmentFile = new AssignmentFile(filename);
         files.add(new AssignmentFile(filename));
-        //System.out.println("Mediator has recieved file named : "+ filename);
-        //System.out.println(files);
-        //printAssignmentFiles();
 
-        //creating new nested folder and copying files
+        // creating new nested folder and copying files
         NestedFolder nestedFolder = new NestedFolder(path);
-        File f = new File(path.toString()+ "/" + filename);
+        File f = new File(path.toString() + "/" + filename);
 
-        try{
+        try {
             nestedFolder.copyFile(f);
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Cannot copy file");
         }
 
-        // Matching students to assignments
-        for (Student s: students){
+        boolean matched = false; // Matching students to assignments
+        for (Student s : students) {
             ArrayList<String> idMarkers = new ArrayList<String>();
             idMarkers.add(s.getParticipantID());
-            //idMarkers.addAll(s.getNames());
             idMarkers.add(s.getStudentID());
+            idMarkers.add(s.getEmailAddress());
+
+            // idMarkers.addAll(s.getNames());
 
             MatchStudentsToAssignment matchingComponent = new MatchStudentsToAssignment();
-            if (matchingComponent.match(idMarkers, newAssignmentFile.getDelimited())){
+            if (matchingComponent.match(idMarkers, newAssignmentFile.getDelimited(), filename)) {
+                matched = true;
                 s.storeStudentSubmission(filename);
                 System.out.println(s.toString());
+
+                missingSubmissions.remove(s.toString());
+
             } else {
                 s.storeStudentSubmission("Submission not found");
             }
         }
 
-        //renaming files
+        if (!matched)
+            problemSubmissions.add(filename);
+
         rename = new RenameFile(nestedFolder.getNestedFolderPath());
-        for (Student s: students){
-            
-            if (s.getSubmissionState() && filename.equals(s.getAssignmentFileName())
-            ){
+        for (Student s : students) {
+            if (s.getSubmissionState() && filename.equals(s.getAssignmentFileName())) {
                 try {
                     rename.changeFileName(s.getNames(), s.getParticipantID(), filename);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     System.out.println("rename failed");
                 }
-                
+
             }
-            //rename.changeFileName();
         }
 
+        System.out.println("Number of missing files: " + missingSubmissions.size());
+        System.out.println("Number of problem files: " + problemSubmissions.size());
+        for (String m : problemSubmissions) {
+            System.out.println("Problem File details: " + m);
+        }
+        System.out.println();
     }
 
-    public void printAssignmentFiles(){
-        for(AssignmentFile a: files){
+    public void printAssignmentFiles() {
+        for (AssignmentFile a : files) {
             a.toString();
         }
     }
 
-    public void createStudentList() {            //can split into smaller methods... 
+    public void createStudentList() { // can split into smaller methods...
         File currentDir = new File("code/FilesToRename");
         String csvPath = new String();
-        
+
         for (File file : currentDir.listFiles()) {
             if (file.getName().endsWith(".csv")) {
                 csvPath = file.getPath();
             }
         }
 
-        try{
+        try {
             File csvFile = new File(csvPath);
 
             Scanner scan = new Scanner(csvFile);
@@ -103,23 +113,18 @@ public class FileFixingDialog implements Mediator {
             String[] names = new String[4];
 
             while (scan.hasNextLine()) {
-
                 line = scan.nextLine();
-                //System.out.println(line);
                 temp = line.split(",");
 
-                // Iterate through the array of strings and trims all whitespaces.
                 for (int i = 0; i < temp.length; i++) {
                     temp[i] = temp[i].trim();
-                }
+                } // Iterate through the array of strings and trims all whitespaces.
 
-                // Error checking
-                if (temp[0] == "\\s")
+                if (temp[0] == "\\s")// Error checking
                     continue;
 
-                // Seperating the word participants from the digits then using those digits to
-                // start a student object
-                tempSubStrings = temp[0].split("\\s");      
+                // To seperate the word "Participants" from the identifier digits
+                tempSubStrings = temp[0].split("\\s");
 
                 for (int i = 0; i < tempSubStrings.length; i++) {
                     tempSubStrings[i] = tempSubStrings[i].trim();
@@ -127,48 +132,39 @@ public class FileFixingDialog implements Mediator {
 
                 Student tempStudent;
                 // Creating an Array of all names a student might have and adding that to the
-                // Names Arraylist in Students
+                // Arraylist
                 temp[1] = temp[1].trim();
                 names = temp[1].split("\\s");
 
                 for (int i = 0; i < names.length; i++) {
                     names[i] = names[i].trim();
-                    //students.addName(names[i].trim());
                 }
-                
+
                 // Adding the student ID
                 temp[2] = temp[2].trim();
-                //students.addStudentID(temp[2]);
 
                 // Adding email address
                 temp[3] = temp[3].trim();
-                //students.addEmailAddress(temp[3]);
 
-                //students.add(students);
-                tempStudent = new Student(tempSubStrings[1], temp[2], names, temp[3]);        //csv -- participantID,  full name, id, email.
+                // students.add(students);
+                tempStudent = new Student(tempSubStrings[1], temp[2], names, temp[3]);
 
                 students.add(tempStudent);
+                missingSubmissions.add(tempStudent.toString());
             }
             scan.close();
-
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-
-        //System.out.println("File not found");
     }
 
-    public void notify(Object sender, Object event) {
-        // TODO implement here
-    }
-
-    public ArrayList<Student> getStudents(){
+    public ArrayList<Student> getStudents() {
         if (students.isEmpty())
             createStudentList();
         return this.students;
     }
 
-    public ArrayList<AssignmentFile> getAssignmentFiles(){
+    public ArrayList<AssignmentFile> getAssignmentFiles() {
         return this.files;
     }
 
