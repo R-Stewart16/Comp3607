@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach; //previously Before
 import org.junit.jupiter.api.BeforeAll; //previously BeforeClass in Junit4
 import org.junit.jupiter.api.Test;
 
-/**
+/***
  * Unit test for Student.java class.
  */
 public class StudentTest {
@@ -28,8 +28,6 @@ public class StudentTest {
     public static void tearDownClass() {
     }
 
-    // This method runs before each test method
-    // can renamed to initialiseLecturerObjects
     @BeforeEach
     public void setUp() {
         beth = new Student("602637", "81305512", studentNames, "beth.moraleshorton@my.uwi.edu");
