@@ -1,6 +1,9 @@
 package refactor.code;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.AfterEach; //previously After
 import org.junit.jupiter.api.AfterAll; //previously AfterClass
 import org.junit.jupiter.api.BeforeEach; //previously Before
@@ -15,6 +18,7 @@ import org.junit.jupiter.api.Test;
  */
 public class StudentTest {
     private Student beth;
+    private String[] studentNames = { "BethMorale" };
 
     public StudentTest() {
     }
@@ -31,16 +35,12 @@ public class StudentTest {
     // can renamed to initialiseLecturerObjects
     @BeforeEach
     public void setUp() {
-    //    beth = new Student("602637", "81305512", "");
+        beth = new Student("602637", "81305512", studentNames, "beth.moraleshorton@my.uwi.edu");
     }
 
     @AfterEach
     public void tearDown() {
     }
-
-    /**
-     * Test of getFirstName method, of class Student.@DisplayName("😱 emoji name")
-     */
 
     @Test
     public void testgetPartipantID() {
@@ -48,6 +48,37 @@ public class StudentTest {
         String expResult = "602637";
         String result = beth.getParticipantID();
         assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testgetStudentID() {
+        System.out.println("getStudentID");
+        String expResult = "81305512";
+        String result = beth.getStudentID();
+        assertEquals(expResult, result);
+    }
+
+    // @Test
+    // public void testgetNames() {
+    // System.out.println("getgetNames");
+    // String expResult = "BethMorale";
+    // ArrayList<String> result = beth.getNames();
+    // assertEquals(expResult, result);
+    // }
+
+    @Test
+    public void testgetEmailAddress() {
+        System.out.println("getEmailAddress()");
+        String expResult = "beth.moraleshorton@my.uwi.edu";
+        String result = beth.getEmailAddress();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testgetAssignmentFileName() {
+        System.out.println("getAssignmentFileName");
+        String result = beth.getParticipantID();
+        assertNotNull(result);
     }
 
 }
