@@ -5,14 +5,25 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class RenameFile extends FileFixingDialog {
+    
+    String fileName; /*** the original file name of the submitted file */
+    Path path;  /*** the path to the folder - FilesToRename  */
 
-    String fileName;
-    Path path;
-
+    /**
+     * 
+     * @param pathToFolder the path to the folder - FilesToRename 
+     */
     public RenameFile(Path pathToFolder) {
         this.path = pathToFolder;
     }
 
+    /**
+     * Generates a new name to rename files based on convention 2
+     * @param studentNames  the names of the student
+     * @param participantID  the participant Id of the student
+     * @param fileName  the original name of the file to be renamed 
+     * @return  a string containing the new name to rename the file
+     */
     public String generateNewName(ArrayList<String> studentNames, String participantID, String fileName) {
         String renamedFileName = new String();
         for (String s : studentNames) {
@@ -26,6 +37,14 @@ public class RenameFile extends FileFixingDialog {
         return renamedFileName;
     }
 
+
+    /**
+     * Renames the file to convention 2 by calling generateNewName
+     * @param studentNames the names of the student
+     * @param participantID the participant Id of the student
+     * @param fileName the original name of the file to be renamed 
+     * @throws InterruptedException  when the thread is awaken or interupted while it is sleeping/waitiing
+     */
     public void changeFileName(ArrayList<String> studentNames, String participantID, String fileName)
             throws InterruptedException {
 

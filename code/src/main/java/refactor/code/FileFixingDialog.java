@@ -16,6 +16,10 @@ public class FileFixingDialog implements Mediator {
     private ArrayList<String> problemSubmissions;
     private String seperator = System.getProperty("file.separator");
 
+
+    /***
+     * Initializes the student arraylist, the assignment files arraylist and the missing and problem submissions arraylist
+     */
     public FileFixingDialog() {
         students = new ArrayList<Student>();
         files = new ArrayList<AssignmentFile>();
@@ -23,6 +27,12 @@ public class FileFixingDialog implements Mediator {
         problemSubmissions = new ArrayList<String>();
     }
 
+
+    /***
+     * Matches the students to assignment Files
+     * @param fileName the name of the filename 
+     * @return true if the student is matched to the file successfully, false otherwise
+     */
     private boolean matchStudents(String fileName){
         boolean matched = false; // Matching students to assignments
         for (Student s : students) {
@@ -48,6 +58,10 @@ public class FileFixingDialog implements Mediator {
         return matched;
     }
 
+
+    /***
+     * 
+     */
     public void updateMediator(String filename, Path path) {
         // find the csv and create an collection of students
 
@@ -80,6 +94,10 @@ public class FileFixingDialog implements Mediator {
     }
 
 
+    /***
+     * 
+     * @param filename original file name of the submitted file
+     */
     public void renameFile(String filename){
         rename = new RenameFile(nestedFolder.getNestedFolderPath());
         for (Student s : students) {
@@ -92,14 +110,13 @@ public class FileFixingDialog implements Mediator {
             }
         }
     }
+    
 
-
-    public void printAssignmentFiles() {
-        for (AssignmentFile a : files) {
-            a.toString();
-        }
-    }
-
+    /***
+     * Finds the path to the csv file
+     * @param path the path to the 
+     * @return
+     */
     public String getCSVPath(Path path){
         File currentDir = new File(path.toString());
         String csvPath = new String();
@@ -112,7 +129,12 @@ public class FileFixingDialog implements Mediator {
         return csvPath;
     }
 
-    public void createStudentList(Path path) { // can split into smaller methods...
+
+    /***
+     * Populates the student arrayList with information from the csv
+     * @param path the path to the csv file in FilesToRename
+     */
+    public void createStudentList(Path path) { 
         
         try {
             File csvFile = new File(getCSVPath(path));
@@ -155,10 +177,19 @@ public class FileFixingDialog implements Mediator {
         }
     }
 
+    
+    /***
+     * 
+     * @return
+     */
     public ArrayList<Student> getStudents() {
         return this.students;
     }
 
+    /***
+     * 
+     * @return
+     */
     public ArrayList<AssignmentFile> getAssignmentFiles() {
         return this.files;
     }

@@ -18,30 +18,48 @@ public class FileToRename implements FolderDirectory {
     private ArrayList<Observer> observers;
     private String fileName;
 
+    /***
+     * 
+     */
     public FileToRename() {
         observers = new ArrayList<Observer>();
         generatePath();
     }
 
+    /***
+     * 
+     */
     public void notifyObserver() {
         for (Observer o : observers) {
             o.update(fileName, path);
         }
     }
 
+    /***
+     * Generates the path to the FilesToRename
+     */
     public void generatePath(){
         String separator = System.getProperty("file.separator");
         path = Paths.get("code" + separator + "FilesToRename");
     }
 
+    /***
+     * 
+     */
     public void attach(Observer o) {
         observers.add(o);
     }
 
+    /***
+     * 
+     */
     public void detach(Observer o) {
         observers.remove(o);
     }
 
+    /***
+     * monitors the FilesToRename folder for any new files to rename
+     */
     public void monitorDirectory() {
         initialCheck();
         try (WatchService service = FileSystems.getDefault().newWatchService()) {
@@ -70,6 +88,9 @@ public class FileToRename implements FolderDirectory {
         }
     }
 
+    /***
+     * Renames all files in the directory if any exists
+     */
     public void initialCheck(){
         File rootfolder = new File(path.toString());
         if(rootfolder.listFiles().length != 0){

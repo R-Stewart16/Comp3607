@@ -11,12 +11,16 @@ public class NestedFolder extends FileFixingDialog {
 
     /***
      * 
-     * @param path
+     * @param path the path of the renamedFiles folder
      */
     public NestedFolder(Path path) {
         createNestedFolder(path);
     }
 
+    /***
+     * Creates the nested folder renamedFiles
+     * @param path the path of the renamedFiles folder
+     */
     public void createNestedFolder(Path path) {
         folder = new File(path.toString());
         String seperator = System.getProperty("file.separator");
@@ -28,6 +32,11 @@ public class NestedFolder extends FileFixingDialog {
         }
     }
 
+    /**
+     * Copies the file to rename to the renamedFiles folder
+     * @param newFile the new file that is being copied
+     * @throws IOException if an input or output exception occured
+     */
     public void copyFile(File newFile) throws IOException {
         String seperator = System.getProperty("file.separator");
         String path = "code"+seperator+"FilesToRename"+seperator+"renamedFiles"+seperator;
@@ -37,6 +46,10 @@ public class NestedFolder extends FileFixingDialog {
         }
     }
 
+    /**
+     * 
+     * @return the path to the nested folder renamedFiles 
+     */
     public Path getNestedFolderPath() {
         return nestedFolder.toPath();
     }

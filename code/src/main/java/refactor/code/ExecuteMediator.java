@@ -6,10 +6,16 @@ public class ExecuteMediator implements Observer {
 
     FileFixingDialog fixer;
 
+    /**
+     * 
+     */
     public ExecuteMediator() {
         fixer = new FileFixingDialog();
     }
 
+    /**
+     * 
+     */
     public void update(String filename, Path path) {
         fixer.updateMediator(filename, path);
     }
