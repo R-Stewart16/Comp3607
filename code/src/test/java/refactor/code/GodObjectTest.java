@@ -16,8 +16,6 @@ import org.junit.jupiter.api.Test;
  * Unit test for Student.java class.
  */
 public class GodObjectTest {
-    private FileFixingDialog fixer;
-    private ArrayList<AssignmentFile> files;
     private Student student;
     private String[] studentNames = { "BethMorales-Horton" };
     private MatchStudentsToAssignment matchingComponent;
@@ -39,9 +37,7 @@ public class GodObjectTest {
 
     @BeforeEach
     public void setUp() {
-        fixer = new FileFixingDialog();
         student = new Student("602637", "81305512", studentNames, "beth.moraleshorton@my.uwi.edu");
-        files = new ArrayList<AssignmentFile>();
         matchingComponent = new MatchStudentsToAssignment();
         idMarkers = new ArrayList<String>();
         idMarkers.add(student.getParticipantID());

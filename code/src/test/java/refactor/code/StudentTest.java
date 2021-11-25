@@ -22,21 +22,9 @@ public class StudentTest {
     public StudentTest() {
     }
 
-    @BeforeAll
-    public static void setUpClass() {
-    }
-
-    @AfterAll
-    public static void tearDownClass() {
-    }
-
     @BeforeEach
     public void setUp() {
         beth = new Student("602637", "81305512", studentNames, "beth.moraleshorton@my.uwi.edu");
-    }
-
-    @AfterEach
-    public void tearDown() {
     }
 
     @Test

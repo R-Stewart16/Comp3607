@@ -18,19 +18,10 @@ public class NestedFolderPathTest {
     public NestedFolderPathTest() {
     }
 
-    @BeforeAll
-    public static void setUpClass() {
-
-    }
-
     @BeforeEach
     public void setUp() {
         Path pathToFolder = Paths.get("code" + separator + "FilesToRename" + separator).toAbsolutePath();
         renamedFiles = new NestedFolder(pathToFolder);
-    }
-
-    @AfterEach
-    public void tearDown() {
     }
 
     @Test
