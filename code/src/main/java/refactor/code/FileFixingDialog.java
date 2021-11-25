@@ -23,14 +23,14 @@ public class FileFixingDialog implements Mediator {
         problemSubmissions = new ArrayList<String>();
     }
 
-    private boolean matchStudents(String fileName){
+    public boolean matchStudents(String fileName) {
         boolean matched = false; // Matching students to assignments
         for (Student s : students) {
             ArrayList<String> idMarkers = new ArrayList<String>();
             idMarkers.add(s.getParticipantID());
             idMarkers.add(s.getStudentID());
             idMarkers.add(s.getEmailAddress());
-            //idMarkers.addAll(s.getNames());
+            // idMarkers.addAll(s.getNames());
 
             MatchStudentsToAssignment matchingComponent = new MatchStudentsToAssignment();
             if (matchingComponent.match(idMarkers, newAssignmentFile.getDelimited(), fileName)) {

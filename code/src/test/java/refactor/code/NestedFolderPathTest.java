@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class CreateRenamedFileTest {
+public class NestedFolderPathTest {
     private NestedFolder renamedFiles;
     String separator = System.getProperty("file.separator");
     Path pathToFolder;
 
-    public CreateRenamedFileTest() {
+    public NestedFolderPathTest() {
     }
 
     @BeforeAll
@@ -40,4 +40,5 @@ public class CreateRenamedFileTest {
         Path actual = renamedFiles.getNestedFolderPath();
         assertEquals(expected, actual);
     }
+
 }
