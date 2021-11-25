@@ -5,8 +5,8 @@ public class FileFixer {
     public static void main(String[] args) {
         System.out.println("Please add files to the folder called 'FilesToRename' ");
 
-        ExecuteMediator newObserver = new ExecuteMediator();
-        FileToRename folder = new FileToRename();
+        Observer newObserver = new ExecuteMediator();
+        FolderDirectory folder = new FileToRename();
         folder.attach(newObserver);
         folder.monitorDirectory();
 

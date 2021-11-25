@@ -7,10 +7,9 @@ public class Student {
     private ArrayList<String> names;
     private String participantID;
     private String emailAddress;
-    private String studentSubmission; // assumes student can only submit one file.
+    private String studentSubmission; 
     private String studentID;
-
-    private boolean submitted; // check over
+    private boolean submitted;
 
     public Student(String participantID, String studentID, String[] names, String email) {
         this.names = new ArrayList<String>();
