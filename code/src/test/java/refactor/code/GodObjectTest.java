@@ -57,27 +57,4 @@ public class GodObjectTest {
         assertTrue(success);
     }
 
-    // @Test
-    // public void testgetStudentID() {
-    // System.out.println("getStudentID()");
-    // String expected = "81305512";
-    // String actual = beth.getStudentID();
-    // assertEquals(expected, actual);
-    // }
-
-    // @Test
-    // public void testgetEmailAddress() {
-    // System.out.println("getEmailAddress()");
-    // String expected = "beth.moraleshorton@my.uwi.edu";
-    // String actual = beth.getEmailAddress();
-    // assertEquals(expected, actual);
-    // }
-
-    // @Test
-    // public void testgetAssignmentFileName() {
-    // System.out.println("getAssignmentFileName()");
-    // String actual = beth.getParticipantID();
-    // assertNotNull(actual);
-    // }
-
 }

@@ -20,7 +20,7 @@ public class AssignmentFileTest {
 
     @Test
     public void testGetFileName() {
-        System.out.println("getFileName");
+        System.out.println("getFileName()");
         String expected = "1409121490-602637_Beth_Morales-Horton_601683_Assignment1_81305512";
         String actual = file.getFileName();
         assertEquals(expected, actual);
