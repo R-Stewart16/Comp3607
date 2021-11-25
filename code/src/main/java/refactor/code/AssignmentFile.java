@@ -8,7 +8,6 @@ public class AssignmentFile extends FileFixingDialog {
     private String[] fileNameDelimited;
 
     public AssignmentFile(String fileName) {
-
         this.fileName = fileName;
         splitFileName();
     }

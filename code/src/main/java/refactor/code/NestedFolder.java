@@ -9,10 +9,7 @@ public class NestedFolder extends FileFixingDialog {
     private File folder;
     private File nestedFolder;
 
-    /***
-     * 
-     * @param path
-     */
+
     public NestedFolder(Path path) {
         createNestedFolder(path);
     }
