@@ -57,7 +57,7 @@ public class GodObjectTest {
         if (matchingComponent.match(idMarkers, newAssignmentFile.getDelimited(),
                 "1409121490-602637_Beth_Morales-Horton_601683_Assignment1_81305512.pdf"))
             success = true;
-        ;
+
         assertTrue(success);
     }
 
