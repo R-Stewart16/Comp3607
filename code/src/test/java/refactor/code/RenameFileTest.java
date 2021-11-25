@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -24,20 +23,11 @@ public class RenameFileTest {
     public RenameFileTest() {
     }
 
-    @BeforeAll
-    public static void setUpClass() {
-
-    }
-
     @BeforeEach
     public void setUp() {
         studentNames = new ArrayList<>();
         studentNames.add("Beth Morales-Horton");
         renamedFile = new RenameFile(pathToFolder);
-    }
-
-    @AfterEach
-    public void tearDown() {
     }
 
     @Test
@@ -47,12 +37,5 @@ public class RenameFileTest {
         String actual = renamedFile.generateNewName(studentNames, participantID, fileName);
         assertEquals(expected, actual);
     }
-
-    // @Test
-    // public void changeFileNameTest() {
-    // System.out.println("changeFileName()");
-    // renamedFile.changeFileName(studentNames, participantID, fileName);
-
-    // }
 
 }

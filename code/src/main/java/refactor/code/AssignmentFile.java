@@ -12,7 +12,6 @@ public class AssignmentFile extends FileFixingDialog {
      * @param fileName the file name of the submitted assignment file
      */
     public AssignmentFile(String fileName) {
-
         this.fileName = fileName;
         splitFileName();
     }
@@ -52,4 +51,5 @@ public class AssignmentFile extends FileFixingDialog {
         detail += "AssignmentFile has Recieved :" + fileName;
         return detail;
     }
+
 }

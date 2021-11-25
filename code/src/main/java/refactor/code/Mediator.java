@@ -9,6 +9,6 @@ public interface Mediator {
      * @param filename original file that was submitted
      * @param path the path to the file that was submitted
      */
-    public void updateMediator(String filename, Path path);
+    public void updateMediator(String fileName, Path path);
 
 }

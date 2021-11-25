@@ -33,14 +33,14 @@ public class FileFixingDialog implements Mediator {
      * @param fileName the name of the filename 
      * @return true if the student is matched to the file successfully, false otherwise
      */
-    private boolean matchStudents(String fileName){
+    public boolean matchStudents(String fileName) {
         boolean matched = false; // Matching students to assignments
         for (Student s : students) {
             ArrayList<String> idMarkers = new ArrayList<String>();
             idMarkers.add(s.getParticipantID());
             idMarkers.add(s.getStudentID());
             idMarkers.add(s.getEmailAddress());
-            //idMarkers.addAll(s.getNames());
+            // idMarkers.addAll(s.getNames());
 
             MatchStudentsToAssignment matchingComponent = new MatchStudentsToAssignment();
             if (matchingComponent.match(idMarkers, newAssignmentFile.getDelimited(), fileName)) {
@@ -62,19 +62,19 @@ public class FileFixingDialog implements Mediator {
     /***
      * 
      */
-    public void updateMediator(String filename, Path path) {
+    public void updateMediator(String fileName, Path path) {
         // find the csv and create an collection of students
 
         if (students.isEmpty()) {
-            createStudentList(path);
+            createListOfEnrolledStudents(path);
         }
 
-        newAssignmentFile = new AssignmentFile(filename);
-        files.add(new AssignmentFile(filename));
+        newAssignmentFile = new AssignmentFile(fileName);
+        files.add(new AssignmentFile(fileName));
 
         // creating new nested folder and copying files
         nestedFolder = new NestedFolder(path);
-        File f = new File(path.toString() + seperator + filename);
+        File f = new File(path.toString() + seperator + fileName);
 
         try {
             nestedFolder.copyFile(f);
@@ -82,8 +82,8 @@ public class FileFixingDialog implements Mediator {
             System.out.println("Cannot copy file");
         }
 
-        matchStudents(filename);
-        renameFile(filename);  
+        matchStudents(fileName);
+        renameFile(fileName);  
 
         System.out.println("Number of missing files: " + missingSubmissions.size());
         System.out.println("Number of problem files: " + problemSubmissions.size());
@@ -97,13 +97,13 @@ public class FileFixingDialog implements Mediator {
     /***
      * 
      * @param filename original file name of the submitted file
-     */
-    public void renameFile(String filename){
+    */
+    public void renameFile(String fileName){
         rename = new RenameFile(nestedFolder.getNestedFolderPath());
         for (Student s : students) {
-            if (s.getSubmissionState() && filename.equals(s.getAssignmentFileName())) {
+            if (s.getSubmissionState() && fileName.equals(s.getAssignmentFileName())) {
                 try {
-                    rename.changeFileName(s.getNames(), s.getParticipantID(), filename);
+                    rename.changeFileName(s.getNames(), s.getParticipantID(), fileName);
                 } catch (Exception e) {
                     System.out.println("rename failed");
                 }
@@ -134,7 +134,7 @@ public class FileFixingDialog implements Mediator {
      * Populates the student arrayList with information from the csv
      * @param path the path to the csv file in FilesToRename
      */
-    public void createStudentList(Path path) { 
+    public void createListOfEnrolledStudents(Path path) { // can split into smaller methods...
         
         try {
             File csvFile = new File(getCSVPath(path));
@@ -175,23 +175,6 @@ public class FileFixingDialog implements Mediator {
         } catch (Exception e) {
             System.out.println("Error: Cannot create list of enrolled students");
         }
-    }
-
-    
-    /***
-     * 
-     * @return
-     */
-    public ArrayList<Student> getStudents() {
-        return this.students;
-    }
-
-    /***
-     * 
-     * @return
-     */
-    public ArrayList<AssignmentFile> getAssignmentFiles() {
-        return this.files;
     }
 
 }

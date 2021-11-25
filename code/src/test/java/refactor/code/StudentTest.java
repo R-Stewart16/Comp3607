@@ -2,6 +2,8 @@ package refactor.code;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 // import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach; //previously After
@@ -20,23 +22,9 @@ public class StudentTest {
     public StudentTest() {
     }
 
-    @BeforeAll
-    public static void setUpClass() {
-    }
-
-    @AfterAll
-    public static void tearDownClass() {
-    }
-
-    // This method runs before each test method
-    // can renamed to initialiseLecturerObjects
     @BeforeEach
     public void setUp() {
         beth = new Student("602637", "81305512", studentNames, "beth.moraleshorton@my.uwi.edu");
-    }
-
-    @AfterEach
-    public void tearDown() {
     }
 
     @Test
@@ -55,13 +43,14 @@ public class StudentTest {
         assertEquals(expected, actual);
     }
 
-    // @Test
-    // public void testgetNames() {
-    // System.out.println("getNames()");
-    // String expected = "BethMorale";
-    // ArrayList<String> actual = beth.getNames();
-    // assertEquals(expected, actual);
-    // }
+    @Test
+    public void testgetNames() {
+        System.out.println("getNames()");
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("BethMorales-Horton");
+        ArrayList<String> actual = beth.getNames();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void testgetEmailAddress() {

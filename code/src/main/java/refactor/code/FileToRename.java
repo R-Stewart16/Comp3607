@@ -61,7 +61,7 @@ public class FileToRename implements FolderDirectory {
      * monitors the FilesToRename folder for any new files to rename
      */
     public void monitorDirectory() {
-        initialCheck();
+        renameExistingFiles();
         try (WatchService service = FileSystems.getDefault().newWatchService()) {
             Map<WatchKey, Path> keyMap = new HashMap<>();
 
@@ -91,7 +91,7 @@ public class FileToRename implements FolderDirectory {
     /***
      * Renames all files in the directory if any exists
      */
-    public void initialCheck(){
+    public void renameExistingFiles(){
         File rootfolder = new File(path.toString());
         if(rootfolder.listFiles().length != 0){
             for(File file : rootfolder.listFiles()){
@@ -102,7 +102,5 @@ public class FileToRename implements FolderDirectory {
             }  
         }  
     }
-
-
 
 }

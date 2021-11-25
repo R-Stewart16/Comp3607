@@ -4,20 +4,20 @@ import java.nio.file.Path;
 
 public class ExecuteMediator implements Observer {
 
-    FileFixingDialog fixer;
+    FileFixingDialog fileFixingDialog;
 
     /**
      * 
      */
     public ExecuteMediator() {
-        fixer = new FileFixingDialog();
+        fileFixingDialog = new FileFixingDialog();
     }
 
-    /**
+    /***
      * 
      */
-    public void update(String filename, Path path) {
-        fixer.updateMediator(filename, path);
+    public void update(String fileName, Path path) {
+        fileFixingDialog.updateMediator(fileName, path);
     }
 
 }
