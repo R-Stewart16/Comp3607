@@ -138,8 +138,11 @@ This shows the setup needed to test the Student.java class.
 
 __**DEMO VIDEO LINK:**__
 
+https://www.youtube.com/watch?v=6fbmzOhfXaU
 
+__**TEAM VIDEO**__
 
+https://www.youtube.com/watch?v=aFVIG3v9v88
 
 
 
