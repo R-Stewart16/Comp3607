@@ -60,7 +60,8 @@ public class FileFixingDialog implements Mediator {
 
 
     /***
-     * 
+     *  This method notifies all connected components of the change to the FilesToRename folder 
+     *  and begins the process of renaming the file.
      */
     public void updateMediator(String fileName, Path path) {
         // find the csv and create an collection of students

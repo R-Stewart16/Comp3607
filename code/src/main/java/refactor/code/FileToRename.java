@@ -19,7 +19,7 @@ public class FileToRename implements FolderDirectory {
     private String fileName;
 
     /***
-     * 
+     * Initializing the arraylist of obeservers and creates a path to the rootfolder "FilesToRename"
      */
     public FileToRename() {
         observers = new ArrayList<Observer>();
@@ -27,7 +27,7 @@ public class FileToRename implements FolderDirectory {
     }
 
     /***
-     * 
+     * Notifies the the attached obsevers that a change has occured
      */
     public void notifyObserver() {
         for (Observer o : observers) {
@@ -36,7 +36,7 @@ public class FileToRename implements FolderDirectory {
     }
 
     /***
-     * Generates the path to the FilesToRename
+     * Generates the path to the FilesToRename folder
      */
     public void generatePath(){
         String separator = System.getProperty("file.separator");
@@ -44,14 +44,14 @@ public class FileToRename implements FolderDirectory {
     }
 
     /***
-     * 
+     *  Attaches concrete observers to this publisher object
      */
     public void attach(Observer o) {
         observers.add(o);
     }
 
     /***
-     * 
+     *  Removes an observer from the observer list
      */
     public void detach(Observer o) {
         observers.remove(o);

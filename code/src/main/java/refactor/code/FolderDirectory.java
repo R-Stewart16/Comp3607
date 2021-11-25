@@ -5,19 +5,19 @@ package refactor.code;
 public interface FolderDirectory {
     
     /***
-     * 
+     *  Notifies the attached observers
      */
     public void notifyObserver();
 
     /**
-     * 
+     * adds observer
      * @param o the observer object
      */
     public void attach(Observer o);
 
 
     /***
-     * 
+     * removes observer
      * @param o the observer object
      */
     public void detach(Observer o);
