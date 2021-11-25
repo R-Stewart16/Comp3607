@@ -2,6 +2,8 @@ package refactor.code;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 // import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach; //previously After
@@ -53,13 +55,14 @@ public class StudentTest {
         assertEquals(expected, actual);
     }
 
-    // @Test
-    // public void testgetNames() {
-    // System.out.println("getNames()");
-    // String expected = "BethMorale";
-    // ArrayList<String> actual = beth.getNames();
-    // assertEquals(expected, actual);
-    // }
+    @Test
+    public void testgetNames() {
+        System.out.println("getNames()");
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("BethMorales-Horton");
+        ArrayList<String> actual = beth.getNames();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void testgetEmailAddress() {
